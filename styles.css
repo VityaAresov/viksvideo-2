@@ -30,6 +30,9 @@
   --toggle-sun-inactive: rgba(255, 255, 255, 0.62);
   --toggle-moon-active: #ffffff;
   --toggle-moon-inactive: rgba(255, 255, 255, 0.62);
+  --portfolio-meta-shadow: 0 12px 28px rgba(0, 0, 0, 0.55),
+    0 4px 10px rgba(0, 0, 0, 0.45);
+  --player-label-shadow: 0 8px 18px rgba(0, 0, 0, 0.65);
   --focus-outline: rgba(255, 255, 255, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.35);
   --overlay-foreground: #f5f5f5;
@@ -58,16 +61,16 @@
   --toggle-track-bg: rgba(16, 16, 16, 0.08);
   --toggle-track-border: rgba(16, 16, 16, 0.18);
   --toggle-track-active-border: rgba(126, 192, 42, 0.52);
-  --toggle-track-shadow: 0 10px 24px rgba(15, 15, 20, 0.16);
-  --toggle-active-glow: 0 12px 26px rgba(126, 192, 42, 0.2);
+  --toggle-track-shadow: none;
+  --toggle-active-glow: none;
   --toggle-thumb-bg: rgba(255, 255, 255, 0.95);
   --toggle-thumb-border: rgba(16, 16, 16, 0.18);
-  --toggle-thumb-shadow: 0 10px 22px rgba(15, 15, 20, 0.14);
+  --toggle-thumb-shadow: none;
   --toggle-hover-ring: rgba(126, 192, 42, 0.16);
-  --toggle-sun-active: #060606;
-  --toggle-sun-inactive: rgba(6, 6, 6, 0.74);
-  --toggle-moon-active: #060606;
-  --toggle-moon-inactive: rgba(6, 6, 6, 0.74);
+  --toggle-sun-active: #000000;
+  --toggle-sun-inactive: rgba(0, 0, 0, 0.64);
+  --toggle-moon-active: #000000;
+  --toggle-moon-inactive: rgba(0, 0, 0, 0.64);
   --focus-outline: rgba(16, 16, 16, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.08);
   --overlay-foreground: #f5f5f5;
@@ -75,6 +78,8 @@
   --values-card-border: rgba(16, 16, 16, 0.12);
   --values-card-shadow: 0 24px 46px rgba(15, 15, 20, 0.12);
   --values-number: rgba(124, 183, 42, 0.82);
+  --portfolio-meta-shadow: none;
+  --player-label-shadow: none;
   color-scheme: light;
 }
 
@@ -311,8 +316,8 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(16px, 1.5vw, 18px);
-  height: clamp(16px, 1.5vw, 18px);
+  width: clamp(18px, 1.6vw, 20px);
+  height: clamp(18px, 1.6vw, 20px);
   opacity: 0.72;
   transition: color 0.35s ease, opacity 0.35s ease;
 }
@@ -323,6 +328,7 @@ a:focus-visible {
 
 .theme-toggle__icon--moon {
   color: var(--toggle-moon-inactive);
+  transform: translate(1px, -1px);
 }
 
 .theme-toggle__icon svg {
@@ -424,7 +430,7 @@ a:focus-visible {
   background: none;
   backdrop-filter: none;
   box-shadow: none;
-  text-shadow: 0 12px 28px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.45);
+  text-shadow: var(--portfolio-meta-shadow);
 }
 
 .portfolio-item__client {
@@ -762,7 +768,7 @@ a:focus-visible {
   text-transform: uppercase;
   font-size: clamp(0.75rem, 1.6vw, 1.1rem);
   color: var(--text-primary);
-  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.65);
+  text-shadow: var(--player-label-shadow);
 }
 
 .player__label--title {
