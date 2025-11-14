@@ -17,10 +17,10 @@
   --font-base: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --page-stripe-height: 6px;
-  --toggle-track-bg: rgba(255, 255, 255, 0.06);
-  --toggle-track-border: rgba(255, 255, 255, 0.22);
+  --toggle-track-bg: rgba(255, 255, 255, 0.12);
+  --toggle-track-border: rgba(255, 255, 255, 0.26);
   --toggle-track-active-border: rgba(153, 234, 72, 0.55);
-  --toggle-track-shadow: 0 8px 24px rgba(0, 0, 0, 0.38);
+  --toggle-track-shadow: 0 10px 26px rgba(0, 0, 0, 0.42);
   --toggle-active-glow: 0 12px 26px rgba(153, 234, 72, 0.22);
   --toggle-thumb-bg: rgba(255, 255, 255, 0.18);
   --toggle-thumb-border: rgba(255, 255, 255, 0.65);
@@ -28,7 +28,6 @@
   --toggle-hover-ring: rgba(153, 234, 72, 0.16);
   --toggle-icon-active: #f5f5f5;
   --toggle-icon-inactive: rgba(245, 245, 245, 0.45);
-  --toggle-icon-plus: rgba(245, 245, 245, 0.85);
   --focus-outline: rgba(255, 255, 255, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.35);
   --overlay-foreground: #f5f5f5;
@@ -54,10 +53,10 @@
   --border-strong: rgba(16, 16, 16, 0.18);
   --surface-glass: rgba(16, 16, 16, 0.06);
   --surface-elevated: rgba(16, 16, 16, 0.08);
-  --toggle-track-bg: rgba(16, 16, 16, 0.04);
-  --toggle-track-border: rgba(16, 16, 16, 0.14);
-  --toggle-track-active-border: rgba(126, 192, 42, 0.5);
-  --toggle-track-shadow: 0 8px 22px rgba(15, 15, 20, 0.14);
+  --toggle-track-bg: rgba(16, 16, 16, 0.08);
+  --toggle-track-border: rgba(16, 16, 16, 0.18);
+  --toggle-track-active-border: rgba(126, 192, 42, 0.52);
+  --toggle-track-shadow: 0 10px 24px rgba(15, 15, 20, 0.16);
   --toggle-active-glow: 0 12px 26px rgba(126, 192, 42, 0.2);
   --toggle-thumb-bg: rgba(255, 255, 255, 0.95);
   --toggle-thumb-border: rgba(16, 16, 16, 0.18);
@@ -65,7 +64,6 @@
   --toggle-hover-ring: rgba(126, 192, 42, 0.16);
   --toggle-icon-active: #101010;
   --toggle-icon-inactive: rgba(16, 16, 16, 0.42);
-  --toggle-icon-plus: rgba(16, 16, 16, 0.65);
   --focus-outline: rgba(16, 16, 16, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.08);
   --overlay-foreground: #f5f5f5;
@@ -234,9 +232,9 @@ a:focus-visible {
 }
 
 .theme-toggle {
-  --toggle-height: clamp(30px, 2.4vw + 20px, 40px);
-  --toggle-width: calc(var(--toggle-height) * 2.05);
-  --toggle-thumb-size: calc(var(--toggle-height) - 10px);
+  --toggle-height: clamp(26px, 1.6vw + 18px, 34px);
+  --toggle-width: calc(var(--toggle-height) * 1.9);
+  --toggle-thumb-size: calc(var(--toggle-height) - 8px);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -269,7 +267,7 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding: 0 8px;
   color: var(--toggle-icon-inactive);
   box-shadow: var(--toggle-track-shadow);
   transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
@@ -289,7 +287,7 @@ a:focus-visible {
 .theme-toggle__thumb {
   position: absolute;
   top: 50%;
-  left: calc(100% - var(--toggle-thumb-size) - 4px);
+  left: calc(100% - var(--toggle-thumb-size) - 3px);
   width: var(--toggle-thumb-size);
   height: var(--toggle-thumb-size);
   border-radius: 999px;
@@ -313,82 +311,28 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: clamp(14px, 1.4vw, 16px);
+  height: clamp(14px, 1.4vw, 16px);
   color: var(--toggle-icon-inactive);
-  opacity: 0.55;
+  opacity: 0.6;
   transition: color 0.35s ease, opacity 0.35s ease;
 }
 
-.theme-toggle__icon::before,
-.theme-toggle__icon::after {
-  pointer-events: none;
-}
-
-.theme-toggle__icon--sun::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.theme-toggle__icon--sun::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  width: 2px;
-  height: 2px;
-  border-radius: 1px;
-  background: currentColor;
-  box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor, 6px 0 0 currentColor, -6px 0 0 currentColor,
-    4.5px 4.5px 0 currentColor, -4.5px 4.5px 0 currentColor, 4.5px -4.5px 0 currentColor, -4.5px -4.5px 0 currentColor;
-  opacity: 0.8;
-}
-
-.theme-toggle__icon--moon::before {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: currentColor;
-  transform: rotate(-18deg);
-  box-shadow: -4px 0 0 0 var(--toggle-track-bg);
-}
-
-.theme-toggle__icon--moon::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  right: -3px;
-  width: 9px;
-  height: 9px;
-  background-image: linear-gradient(var(--toggle-icon-plus), var(--toggle-icon-plus)),
-    linear-gradient(var(--toggle-icon-plus), var(--toggle-icon-plus));
-  background-size: 2px 9px, 9px 2px;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  transition: opacity 0.35s ease;
+.theme-toggle__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .theme-toggle[data-theme-toggle-state='light'] .theme-toggle__thumb {
-  left: 4px;
+  left: 3px;
 }
 
 .theme-toggle[data-theme-toggle-state='light'] .theme-toggle__icon--sun,
 .theme-toggle[data-theme-toggle-state='dark'] .theme-toggle__icon--moon {
   color: var(--toggle-icon-active);
   opacity: 1;
-}
-
-.theme-toggle[data-theme-toggle-state='light'] .theme-toggle__icon--moon::after {
-  opacity: 0.4;
-}
-
-.theme-toggle[data-theme-toggle-state='dark'] .theme-toggle__icon--moon::after {
-  opacity: 0.9;
 }
 
 .site-main {
