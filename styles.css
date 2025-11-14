@@ -1046,7 +1046,7 @@ a:focus-visible {
 }
 
 .about-intro {
-  padding: clamp(140px, 18vh, 180px) 0 0;
+  padding: clamp(120px, 16vh, 160px) 0 0;
   background: var(--bg);
 }
 
@@ -1083,7 +1083,7 @@ a:focus-visible {
 }
 
 .about-overview {
-  padding: clamp(110px, 18vh, 160px) 0;
+  padding: clamp(80px, 14vh, 130px) 0;
 }
 
 .about-overview__inner {
@@ -1116,14 +1116,14 @@ a:focus-visible {
 
 .about-overview__body {
   display: grid;
-  gap: 22px;
+  gap: 14px;
   font-size: 1.02rem;
-  line-height: 1.75;
+  line-height: 1.68;
   color: var(--text-secondary);
 }
 
 .about-gallery {
-  padding: clamp(110px, 18vh, 170px) 0;
+  padding: clamp(80px, 15vh, 140px) 0;
 }
 
 .about-gallery__marquee {
@@ -1193,7 +1193,7 @@ a:focus-visible {
 }
 
 .about-clients {
-  padding: clamp(90px, 16vh, 140px) 0;
+  padding: clamp(70px, 13vh, 120px) 0;
 }
 
 .about-clients__inner {
@@ -1239,7 +1239,7 @@ a:focus-visible {
 }
 
 .about-values {
-  padding: clamp(120px, 18vh, 170px) 0 clamp(160px, 22vh, 200px);
+  padding: clamp(90px, 16vh, 150px) 0 clamp(120px, 20vh, 180px);
 }
 
 .about-values__inner {
