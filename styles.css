@@ -87,13 +87,13 @@
   --toggle-sun-inactive: rgba(0, 0, 0, 0.64);
   --toggle-moon-active: #000000;
   --toggle-moon-inactive: rgba(0, 0, 0, 0.64);
-  --nav-surface: rgba(255, 255, 255, 0.86);
+  --nav-surface: rgba(255, 255, 255, 0.22);
   --nav-border: rgba(16, 16, 16, 0.08);
-  --nav-shadow: 0 24px 44px rgba(15, 15, 20, 0.14);
-  --nav-glass-fill: rgba(255, 255, 255, 0.92);
-  --nav-indicator-bg: rgba(255, 255, 255, 0.98);
+  --nav-shadow: 0 26px 52px rgba(15, 15, 20, 0.12);
+  --nav-glass-fill: rgba(255, 255, 255, 0.16);
+  --nav-indicator-bg: rgba(255, 255, 255, 0.42);
   --nav-indicator-border: rgba(16, 16, 16, 0.12);
-  --nav-indicator-shadow: 0 24px 44px rgba(15, 15, 20, 0.12);
+  --nav-indicator-shadow: 0 20px 38px rgba(15, 15, 20, 0.14);
   --focus-outline: rgba(16, 16, 16, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.08);
   --overlay-foreground: #f5f5f5;
