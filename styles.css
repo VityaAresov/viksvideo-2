@@ -26,14 +26,10 @@
   --toggle-thumb-border: rgba(255, 255, 255, 0.65);
   --toggle-thumb-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
   --toggle-hover-ring: rgba(153, 234, 72, 0.16);
-  --toggle-sun-active: #ffb400;
-  --toggle-sun-inactive: rgba(255, 180, 0, 0.62);
-  --toggle-sun-bg: rgba(255, 180, 0, 0.22);
-  --toggle-sun-active-bg: rgba(255, 180, 0, 0.38);
-  --toggle-moon-active: #4cc9ff;
-  --toggle-moon-inactive: rgba(76, 201, 255, 0.62);
-  --toggle-moon-bg: rgba(76, 201, 255, 0.22);
-  --toggle-moon-active-bg: rgba(76, 201, 255, 0.36);
+  --toggle-sun-active: #ffffff;
+  --toggle-sun-inactive: rgba(255, 255, 255, 0.62);
+  --toggle-moon-active: #ffffff;
+  --toggle-moon-inactive: rgba(255, 255, 255, 0.62);
   --focus-outline: rgba(255, 255, 255, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.35);
   --overlay-foreground: #f5f5f5;
@@ -68,14 +64,10 @@
   --toggle-thumb-border: rgba(16, 16, 16, 0.18);
   --toggle-thumb-shadow: 0 10px 22px rgba(15, 15, 20, 0.14);
   --toggle-hover-ring: rgba(126, 192, 42, 0.16);
-  --toggle-sun-active: #2b1a00;
-  --toggle-sun-inactive: rgba(43, 26, 0, 0.72);
-  --toggle-sun-bg: rgba(43, 26, 0, 0.2);
-  --toggle-sun-active-bg: rgba(43, 26, 0, 0.38);
-  --toggle-moon-active: #07143d;
-  --toggle-moon-inactive: rgba(7, 20, 61, 0.74);
-  --toggle-moon-bg: rgba(7, 20, 61, 0.2);
-  --toggle-moon-active-bg: rgba(7, 20, 61, 0.36);
+  --toggle-sun-active: #060606;
+  --toggle-sun-inactive: rgba(6, 6, 6, 0.74);
+  --toggle-moon-active: #060606;
+  --toggle-moon-inactive: rgba(6, 6, 6, 0.74);
   --focus-outline: rgba(16, 16, 16, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.08);
   --overlay-foreground: #f5f5f5;
@@ -313,27 +305,24 @@ a:focus-visible {
   box-shadow: var(--toggle-thumb-shadow), 0 0 0 4px var(--toggle-hover-ring);
 }
 
+
 .theme-toggle__icon {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(14px, 1.4vw, 16px);
-  height: clamp(14px, 1.4vw, 16px);
-  border-radius: 999px;
-  padding: 2px;
+  width: clamp(16px, 1.5vw, 18px);
+  height: clamp(16px, 1.5vw, 18px);
   opacity: 0.72;
   transition: color 0.35s ease, opacity 0.35s ease;
 }
 
 .theme-toggle__icon--sun {
   color: var(--toggle-sun-inactive);
-  background: var(--toggle-sun-bg);
 }
 
 .theme-toggle__icon--moon {
   color: var(--toggle-moon-inactive);
-  background: var(--toggle-moon-bg);
 }
 
 .theme-toggle__icon svg {
@@ -350,15 +339,11 @@ a:focus-visible {
 .theme-toggle[data-theme-toggle-state='light'] .theme-toggle__icon--sun {
   color: var(--toggle-sun-active);
   opacity: 1;
-  background: var(--toggle-sun-active-bg);
-  box-shadow: 0 0 0 1px var(--toggle-sun-active);
 }
 
 .theme-toggle[data-theme-toggle-state='dark'] .theme-toggle__icon--moon {
   color: var(--toggle-moon-active);
   opacity: 1;
-  background: var(--toggle-moon-active-bg);
-  box-shadow: 0 0 0 1px var(--toggle-moon-active);
 }
 
 .site-main {
