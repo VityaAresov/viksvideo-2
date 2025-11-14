@@ -344,12 +344,14 @@ a:focus-visible {
   left: 3px;
 }
 
-.theme-toggle[data-theme-toggle-state='light'] .theme-toggle__icon--sun {
+.theme-toggle[data-theme-toggle-state='light'] .theme-toggle__icon--sun,
+:root[data-theme='light'] .theme-toggle__icon--sun {
   color: var(--toggle-sun-active);
   opacity: 1;
 }
 
-.theme-toggle[data-theme-toggle-state='dark'] .theme-toggle__icon--moon {
+.theme-toggle[data-theme-toggle-state='dark'] .theme-toggle__icon--moon,
+:root[data-theme='dark'] .theme-toggle__icon--moon {
   color: var(--toggle-moon-active);
   opacity: 1;
 }
