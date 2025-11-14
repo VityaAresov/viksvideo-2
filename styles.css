@@ -40,6 +40,15 @@
   --values-card-border: rgba(255, 255, 255, 0.08);
   --values-card-shadow: 0 28px 48px rgba(0, 0, 0, 0.38);
   --values-number: rgba(153, 234, 72, 0.8);
+  --contact-lede-color: rgba(255, 255, 255, 0.7);
+  --contact-form-surface: rgba(15, 15, 15, 0.42);
+  --contact-form-border: rgba(255, 255, 255, 0.08);
+  --contact-form-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+  --contact-field-bg: rgba(8, 8, 8, 0.75);
+  --contact-field-border: rgba(255, 255, 255, 0.12);
+  --contact-field-text: var(--accent);
+  --contact-field-placeholder: var(--text-tertiary);
+  --contact-checkbox-text: rgba(255, 255, 255, 0.7);
   color-scheme: dark;
 }
 
@@ -78,8 +87,18 @@
   --values-card-border: rgba(16, 16, 16, 0.12);
   --values-card-shadow: 0 24px 46px rgba(15, 15, 20, 0.12);
   --values-number: rgba(124, 183, 42, 0.82);
-  --portfolio-meta-shadow: none;
+  --portfolio-meta-shadow: 0 12px 26px rgba(0, 0, 0, 0.42),
+    0 6px 16px rgba(0, 0, 0, 0.35);
   --player-label-shadow: none;
+  --contact-lede-color: rgba(16, 16, 16, 0.68);
+  --contact-form-surface: rgba(255, 255, 255, 0.9);
+  --contact-form-border: rgba(16, 16, 16, 0.1);
+  --contact-form-shadow: 0 24px 44px rgba(15, 15, 20, 0.12);
+  --contact-field-bg: rgba(255, 255, 255, 0.92);
+  --contact-field-border: rgba(16, 16, 16, 0.12);
+  --contact-field-text: var(--accent);
+  --contact-field-placeholder: rgba(16, 16, 16, 0.42);
+  --contact-checkbox-text: rgba(16, 16, 16, 0.72);
   color-scheme: light;
 }
 
@@ -434,12 +453,13 @@ a:focus-visible {
   background: none;
   backdrop-filter: none;
   box-shadow: none;
+  color: #ffffff;
   text-shadow: var(--portfolio-meta-shadow);
 }
 
 .portfolio-item__client {
   font-size: 0.7rem;
-  color: var(--accent-muted);
+  color: rgba(255, 255, 255, 0.78);
   margin: 0;
   text-shadow: inherit;
 }
@@ -450,6 +470,7 @@ a:focus-visible {
   font-size: clamp(1.4rem, 2.3vw, 2.4rem);
   letter-spacing: 0.22em;
   margin: 0;
+  color: #ffffff;
   text-shadow: inherit;
 }
 
@@ -1481,7 +1502,7 @@ a:focus-visible {
   max-width: 36ch;
   font-size: 0.95rem;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--contact-lede-color);
 }
 
 .contact__details {
@@ -1530,11 +1551,12 @@ a:focus-visible {
 
 .contact__form {
   backdrop-filter: blur(24px);
-  background: rgba(15, 15, 15, 0.42);
-  border: 1px solid var(--border-subtle);
+  background: var(--contact-form-surface);
+  border: 1px solid var(--contact-form-border);
   border-radius: 26px;
   padding: clamp(24px, 2.8vw, 32px);
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--contact-form-shadow);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .contact-form__body {
@@ -1567,18 +1589,18 @@ a:focus-visible {
 .contact-form__textarea {
   width: 100%;
   border-radius: 14px;
-  border: 1px solid var(--border-subtle);
-  background: rgba(8, 8, 8, 0.75);
-  color: var(--accent);
+  border: 1px solid var(--contact-field-border);
+  background: var(--contact-field-bg);
+  color: var(--contact-field-text);
   font-family: var(--font-base);
   font-size: 1rem;
   padding: 0.9rem 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.4s ease;
 }
 
 .contact-form__input::placeholder,
 .contact-form__textarea::placeholder {
-  color: var(--text-tertiary);
+  color: var(--contact-field-placeholder);
 }
 
 .contact-form__input:focus-visible,
@@ -1600,7 +1622,8 @@ a:focus-visible {
   gap: 12px;
   font-size: 0.9rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--contact-checkbox-text);
+  transition: color 0.4s ease;
 }
 
 .contact-form__checkbox input[type="checkbox"] {
