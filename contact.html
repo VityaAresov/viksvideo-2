@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,19 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function () {
+        try {
+          var storageKey = 'viks-theme';
+          var stored = localStorage.getItem(storageKey);
+          var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = stored === 'light' || stored === 'dark' ? stored : prefersLight ? 'light' : 'dark';
+          document.documentElement.dataset.theme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="contact">
@@ -29,14 +42,31 @@
     </div>
 
     <header class="site-header" role="banner">
-      <div class="logo">
-        <img
-          class="logo__image"
-          data-logo-image
-          src=""
-          alt="VIKS Production"
-        />
-        <span class="sr-only">VIKS Production</span>
+      <div class="site-header__inner">
+        <div class="logo">
+          <img
+            class="logo__image"
+            data-logo-image
+            src=""
+            alt="VIKS Production"
+          />
+          <span class="sr-only">VIKS Production</span>
+        </div>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          data-theme-toggle-state="dark"
+          aria-pressed="true"
+          aria-label="Switch to light theme"
+        >
+          <span class="theme-toggle__icon" aria-hidden="true">
+            <span class="theme-toggle__sun"></span>
+            <span class="theme-toggle__moon"></span>
+            <span class="theme-toggle__stars"></span>
+          </span>
+          <span class="sr-only" data-theme-toggle-label>Switch to light theme</span>
+        </button>
       </div>
     </header>
 
@@ -193,6 +223,23 @@
           <input id="footer-email" type="email" placeholder="Subscribe" required />
           <button type="submit">→</button>
         </form>
+      </div>
+      <div class="site-footer__theme">
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          data-theme-toggle-state="dark"
+          aria-pressed="true"
+          aria-label="Switch to light theme"
+        >
+          <span class="theme-toggle__icon" aria-hidden="true">
+            <span class="theme-toggle__sun"></span>
+            <span class="theme-toggle__moon"></span>
+            <span class="theme-toggle__stars"></span>
+          </span>
+          <span class="sr-only" data-theme-toggle-label>Switch to light theme</span>
+        </button>
       </div>
       <div class="site-footer__meta">
         <p>© <span id="year"></span> VIKS Production. All rights reserved.</p>

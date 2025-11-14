@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,19 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function () {
+        try {
+          var storageKey = 'viks-theme';
+          var stored = localStorage.getItem(storageKey);
+          var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = stored === 'light' || stored === 'dark' ? stored : prefersLight ? 'light' : 'dark';
+          document.documentElement.dataset.theme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="about">
@@ -29,14 +42,31 @@
     </div>
 
     <header class="site-header" role="banner">
-      <div class="logo">
-        <img
-          class="logo__image"
-          data-logo-image
-          src=""
-          alt="VIKS Production"
-        />
-        <span class="sr-only">VIKS Production</span>
+      <div class="site-header__inner">
+        <div class="logo">
+          <img
+            class="logo__image"
+            data-logo-image
+            src=""
+            alt="VIKS Production"
+          />
+          <span class="sr-only">VIKS Production</span>
+        </div>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          data-theme-toggle-state="dark"
+          aria-pressed="true"
+          aria-label="Switch to light theme"
+        >
+          <span class="theme-toggle__icon" aria-hidden="true">
+            <span class="theme-toggle__sun"></span>
+            <span class="theme-toggle__moon"></span>
+            <span class="theme-toggle__stars"></span>
+          </span>
+          <span class="sr-only" data-theme-toggle-label>Switch to light theme</span>
+        </button>
       </div>
     </header>
 
@@ -45,7 +75,6 @@
         <div class="about-intro__inner">
           <h1 class="about-intro__title" id="about-intro-heading">CREATIVE PRODUCTION
 THAT DELIVERS RESULTS.</h1>
-          <p class="about-intro__company">VIKS PRODUCTION</p>
         </div>
       </section>
 
@@ -83,29 +112,90 @@ THAT DELIVERS RESULTS.</h1>
       <section class="about-gallery" aria-label="Behind the scenes gallery">
         <div class="about-gallery__marquee" aria-hidden="true">
           <div class="about-gallery__track">
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Camera operator framing a shot" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--portrait about-gallery__item--tilt-left">
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&h=1200&q=80"
+                alt="Camera operator framing a shot"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Director reviewing footage with crew" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--landscape about-gallery__item--tilt-right">
+              <img
+                src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1400&h=900&q=80"
+                alt="Crew preparing a camera setup"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Lighting team preparing a studio" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--portrait about-gallery__item--tilt-right">
+              <img
+                src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&h=1200&q=80"
+                alt="Director reviewing footage with crew"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Production crew collaborating on set" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--landscape about-gallery__item--tilt-left">
+              <img
+                src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1400&h=900&q=80"
+                alt="Dolly shot being set up in studio"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Camera operator framing a shot" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--portrait about-gallery__item--tilt-left">
+              <img
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&h=1200&q=80"
+                alt="Production team filming on location"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Director reviewing footage with crew" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--landscape about-gallery__item--tilt-right">
+              <img
+                src="https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1400&h=900&q=80"
+                alt="Film crew reviewing storyboard"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Lighting team preparing a studio" loading="lazy" />
+            <!-- duplicate sequence for seamless marquee -->
+            <figure class="about-gallery__item about-gallery__item--portrait about-gallery__item--tilt-left">
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&h=1200&q=80"
+                alt="Camera operator framing a shot"
+                loading="lazy"
+              />
             </figure>
-            <figure class="about-gallery__item">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Production crew collaborating on set" loading="lazy" />
+            <figure class="about-gallery__item about-gallery__item--landscape about-gallery__item--tilt-right">
+              <img
+                src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1400&h=900&q=80"
+                alt="Crew preparing a camera setup"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="about-gallery__item about-gallery__item--portrait about-gallery__item--tilt-right">
+              <img
+                src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&h=1200&q=80"
+                alt="Director reviewing footage with crew"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="about-gallery__item about-gallery__item--landscape about-gallery__item--tilt-left">
+              <img
+                src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1400&h=900&q=80"
+                alt="Dolly shot being set up in studio"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="about-gallery__item about-gallery__item--portrait about-gallery__item--tilt-left">
+              <img
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&h=1200&q=80"
+                alt="Production team filming on location"
+                loading="lazy"
+              />
+            </figure>
+            <figure class="about-gallery__item about-gallery__item--landscape about-gallery__item--tilt-right">
+              <img
+                src="https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1400&h=900&q=80"
+                alt="Film crew reviewing storyboard"
+                loading="lazy"
+              />
             </figure>
           </div>
         </div>
@@ -207,6 +297,23 @@ THAT DELIVERS RESULTS.</h1>
           <input id="footer-email-about" type="email" placeholder="Subscribe" required />
           <button type="submit">→</button>
         </form>
+      </div>
+      <div class="site-footer__theme">
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          data-theme-toggle-state="dark"
+          aria-pressed="true"
+          aria-label="Switch to light theme"
+        >
+          <span class="theme-toggle__icon" aria-hidden="true">
+            <span class="theme-toggle__sun"></span>
+            <span class="theme-toggle__moon"></span>
+            <span class="theme-toggle__stars"></span>
+          </span>
+          <span class="sr-only" data-theme-toggle-label>Switch to light theme</span>
+        </button>
       </div>
       <div class="site-footer__meta">
         <p>© <span id="year"></span> VIKS Production. All rights reserved.</p>
