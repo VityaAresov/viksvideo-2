@@ -4,6 +4,7 @@ const playerOverlay = document.querySelector('.player__overlay');
 const playerEmbed = document.querySelector('[data-player-embed]');
 const playerClientLabel = document.querySelector('[data-player-client]');
 const playerTitleLabel = document.querySelector('[data-player-title]');
+const playerSeparator = document.querySelector('[data-player-separator]');
 const closeButton = document.querySelector('.player__close');
 const playerControls = document.querySelector('[data-player-controls]');
 const playToggle = document.querySelector('[data-player-toggle]');
@@ -818,6 +819,13 @@ const openPlayer = async (item) => {
   if (playerTitleLabel) {
     playerTitleLabel.textContent = title || '';
   }
+  if (playerSeparator) {
+    if (client && title) {
+      playerSeparator.removeAttribute('hidden');
+    } else {
+      playerSeparator.setAttribute('hidden', '');
+    }
+  }
 
   player.setAttribute('aria-hidden', 'false');
   playerOverlay.hidden = false;
@@ -832,6 +840,15 @@ const closePlayer = () => {
   teardownMediaElement();
   resetControls();
   isScrubbing = false;
+  if (playerClientLabel) {
+    playerClientLabel.textContent = '';
+  }
+  if (playerTitleLabel) {
+    playerTitleLabel.textContent = '';
+  }
+  if (playerSeparator) {
+    playerSeparator.setAttribute('hidden', '');
+  }
   document.body.classList.remove('no-scroll');
 };
 

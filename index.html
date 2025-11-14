@@ -280,13 +280,19 @@
 
     <div class="player" role="dialog" aria-modal="true" aria-hidden="true">
       <div class="player__inner">
-        <button class="player__close" aria-label="Close video">×</button>
         <div class="player__stage">
+          <button class="player__close" aria-label="Close video">×</button>
           <div class="player__embed" data-player-embed></div>
           <div class="player__hud">
             <div class="player__labels">
-              <p class="player__label player__label--client" data-player-client></p>
               <p class="player__label player__label--title" data-player-title></p>
+              <span
+                class="player__label player__label--separator"
+                data-player-separator
+                aria-hidden="true"
+                hidden
+              >—</span>
+              <p class="player__label player__label--client" data-player-client></p>
             </div>
             <div class="player__controls" data-player-controls hidden>
               <button class="player__button player__button--play" data-player-toggle aria-label="Play video">

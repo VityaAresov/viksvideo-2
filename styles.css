@@ -39,17 +39,19 @@
   --nav-indicator-shadow: var(--shadow-elevated);
   --portfolio-meta-shadow: 0 12px 28px rgba(0, 0, 0, 0.55),
     0 4px 10px rgba(0, 0, 0, 0.45);
-  --player-label-shadow: 0 8px 18px rgba(0, 0, 0, 0.65);
-  --player-controls-bg: rgba(8, 8, 8, 0.78);
-  --player-controls-border: rgba(255, 255, 255, 0.08);
-  --player-controls-text: rgba(245, 245, 245, 0.92);
-  --player-controls-muted: rgba(245, 245, 245, 0.5);
-  --player-progress-track: rgba(245, 245, 245, 0.22);
-  --player-progress-fill: rgba(245, 245, 245, 0.9);
-  --player-progress-handle: rgba(245, 245, 245, 1);
-  --player-control-shadow: 0 24px 54px rgba(0, 0, 0, 0.45);
-  --player-button-hover-bg: rgba(255, 255, 255, 0.1);
-  --player-button-active-bg: rgba(255, 255, 255, 0.18);
+  --player-label-color: rgba(255, 255, 255, 0.92);
+  --player-label-muted: rgba(255, 255, 255, 0.68);
+  --player-label-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+  --player-controls-bg: rgba(12, 12, 14, 0.58);
+  --player-controls-border: rgba(255, 255, 255, 0.16);
+  --player-controls-text: rgba(255, 255, 255, 0.92);
+  --player-controls-muted: rgba(255, 255, 255, 0.55);
+  --player-progress-track: rgba(255, 255, 255, 0.26);
+  --player-progress-fill: rgba(255, 255, 255, 0.92);
+  --player-progress-handle: rgba(255, 255, 255, 1);
+  --player-control-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
+  --player-button-hover-bg: rgba(255, 255, 255, 0.18);
+  --player-button-active-bg: rgba(255, 255, 255, 0.24);
   --focus-outline: rgba(255, 255, 255, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.35);
   --overlay-foreground: #f5f5f5;
@@ -113,17 +115,19 @@
   --values-number: rgba(124, 183, 42, 0.82);
   --portfolio-meta-shadow: 0 12px 26px rgba(0, 0, 0, 0.42),
     0 6px 16px rgba(0, 0, 0, 0.35);
-  --player-label-shadow: none;
-  --player-controls-bg: rgba(255, 255, 255, 0.86);
-  --player-controls-border: rgba(16, 16, 16, 0.08);
-  --player-controls-text: rgba(16, 16, 16, 0.9);
-  --player-controls-muted: rgba(16, 16, 16, 0.45);
-  --player-progress-track: rgba(16, 16, 16, 0.22);
-  --player-progress-fill: rgba(16, 16, 16, 0.8);
-  --player-progress-handle: rgba(16, 16, 16, 1);
-  --player-control-shadow: 0 26px 46px rgba(15, 15, 20, 0.14);
-  --player-button-hover-bg: rgba(16, 16, 16, 0.08);
-  --player-button-active-bg: rgba(16, 16, 16, 0.12);
+  --player-label-color: rgba(255, 255, 255, 0.95);
+  --player-label-muted: rgba(255, 255, 255, 0.7);
+  --player-label-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
+  --player-controls-bg: rgba(18, 18, 22, 0.66);
+  --player-controls-border: rgba(255, 255, 255, 0.2);
+  --player-controls-text: rgba(255, 255, 255, 0.94);
+  --player-controls-muted: rgba(255, 255, 255, 0.62);
+  --player-progress-track: rgba(255, 255, 255, 0.32);
+  --player-progress-fill: rgba(255, 255, 255, 0.92);
+  --player-progress-handle: rgba(255, 255, 255, 1);
+  --player-control-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  --player-button-hover-bg: rgba(255, 255, 255, 0.18);
+  --player-button-active-bg: rgba(255, 255, 255, 0.26);
   --contact-lede-color: rgba(16, 16, 16, 0.68);
   --contact-form-surface: rgba(255, 255, 255, 0.9);
   --contact-form-border: rgba(16, 16, 16, 0.1);
@@ -690,12 +694,13 @@ a:focus-visible {
   font-size: 0.7rem;
 }
 
+
 .player__overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(4, 4, 6, 0.7);
   z-index: 50;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(12px);
 }
 
 .player__overlay[hidden] {
@@ -704,72 +709,66 @@ a:focus-visible {
 
 .player {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: min(82vw, 1280px);
-  max-width: 90vw;
-  max-height: 84vh;
-  background: rgba(8, 8, 8, 0.65);
-  border: 1px solid var(--border-subtle);
-  border-radius: 18px;
-  padding: clamp(8px, 1vw, 16px);
-  display: block;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vw, 64px);
   z-index: 60;
   opacity: 0;
   visibility: hidden;
-  transform: translate(-50%, calc(-50% + 20px)) scale(0.96);
+  transform: translateY(24px) scale(0.97);
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
-  overflow: hidden;
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.4);
 }
 
 .player[aria-hidden="false"] {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translateY(0) scale(1);
 }
-
 
 .player__inner {
   position: relative;
+  width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.player__stage {
+  position: relative;
+  width: min(100%, 1280px);
+  aspect-ratio: 16 / 9;
+  border-radius: clamp(18px, 3vw, 36px);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.55);
 }
 
 .player__close {
   position: absolute;
-  top: clamp(8px, 1.5vw, 18px);
-  left: clamp(8px, 1.5vw, 18px);
-  background: rgba(10, 10, 10, 0.55);
-  border: 1px solid var(--border-muted);
-  width: clamp(36px, 4vw, 44px);
-  height: clamp(36px, 4vw, 44px);
+  top: clamp(12px, 2vw, 28px);
+  right: clamp(12px, 2vw, 28px);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  width: clamp(36px, 4vw, 46px);
+  height: clamp(36px, 4vw, 46px);
   border-radius: 999px;
-  color: var(--overlay-foreground);
+  color: rgba(255, 255, 255, 0.92);
   font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   display: grid;
   place-items: center;
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  pointer-events: auto;
 }
 
 .player__close:hover,
-.player__close:focus {
-  background: rgba(0, 0, 0, 0.8);
-  border-color: var(--border-muted);
-  color: var(--overlay-foreground);
-}
-
-.player__stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: clamp(12px, 2vw, 20px);
-  overflow: hidden;
-  background: #000;
-  max-height: calc(84vh - clamp(8px, 1vw, 16px) * 2);
+.player__close:focus-visible {
+  background: rgba(0, 0, 0, 0.75);
+  border-color: rgba(255, 255, 255, 0.38);
+  color: #fff;
 }
 
 .player__embed {
@@ -811,52 +810,94 @@ a:focus-visible {
   background: #000;
 }
 
+
 .player__hud {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: space-between;
-  padding: clamp(14px, 2vw, 24px);
+  padding: clamp(24px, 3vw, 40px);
   pointer-events: none;
 }
 
+.player__hud::before,
+.player__hud::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.player__hud::before {
+  top: 0;
+  height: clamp(120px, 22vh, 240px);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.player__hud::after {
+  bottom: 0;
+  height: clamp(140px, 28vh, 260px);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
 .player__labels {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(8px, 1.4vw, 18px);
   pointer-events: none;
 }
 
 .player__label {
   margin: 0;
   font-family: var(--font-display);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-size: clamp(0.75rem, 1.6vw, 1.1rem);
-  color: var(--text-primary);
+  font-size: clamp(0.72rem, 1.5vw, 1.05rem);
+  color: var(--player-label-color);
   text-shadow: var(--player-label-shadow);
 }
 
+.player__label:empty {
+  display: none;
+}
+
 .player__label--title {
-  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  font-size: clamp(0.82rem, 1.9vw, 1.2rem);
+  font-weight: 600;
+}
+
+.player__label--client {
+  font-size: clamp(0.72rem, 1.5vw, 1rem);
+  color: var(--player-label-muted);
+}
+
+.player__label--separator {
+  font-size: clamp(0.72rem, 1.5vw, 1rem);
+  color: var(--player-label-muted);
 }
 
 .player__controls {
+  position: relative;
+  z-index: 1;
   margin-top: auto;
-  align-self: center;
-  width: min(100%, 520px);
+  width: 100%;
+  max-width: none;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: clamp(12px, 2vw, 18px);
-  border-radius: 999px;
+  gap: clamp(16px, 2.6vw, 32px);
+  border-radius: clamp(28px, 4vw, 48px);
   background: var(--player-controls-bg);
   border: 1px solid var(--player-controls-border);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(18px);
   color: var(--player-controls-text);
-  padding: clamp(8px, 1.6vw, 12px) clamp(14px, 2.4vw, 22px);
+  padding: clamp(14px, 2.4vw, 22px) clamp(18px, 3.2vw, 34px);
   box-shadow: var(--player-control-shadow);
   pointer-events: auto;
   transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
@@ -873,8 +914,8 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(36px, 5vw, 44px);
-  height: clamp(36px, 5vw, 44px);
+  width: clamp(40px, 5vw, 54px);
+  height: clamp(40px, 5vw, 54px);
   border-radius: 50%;
   color: inherit;
   cursor: pointer;
@@ -897,8 +938,8 @@ a:focus-visible {
 }
 
 .player__icon {
-  width: clamp(16px, 3vw, 20px);
-  height: clamp(16px, 3vw, 20px);
+  width: clamp(16px, 2.6vw, 22px);
+  height: clamp(16px, 2.6vw, 22px);
   fill: currentColor;
   flex-shrink: 0;
 }
@@ -932,7 +973,7 @@ a:focus-visible {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: clamp(8px, 1.6vw, 14px);
+  gap: clamp(12px, 2vw, 20px);
 }
 
 .player__time {
@@ -945,7 +986,7 @@ a:focus-visible {
 .player__seek {
   appearance: none;
   width: 100%;
-  height: 4px;
+  height: 3px;
   border-radius: 999px;
   background: var(--player-progress-track);
   position: relative;
@@ -958,8 +999,8 @@ a:focus-visible {
 
 .player__seek::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--player-progress-handle);
   border: 2px solid var(--player-progress-fill);
@@ -968,8 +1009,8 @@ a:focus-visible {
 }
 
 .player__seek::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--player-progress-handle);
   border: 2px solid var(--player-progress-fill);
@@ -982,7 +1023,7 @@ a:focus-visible {
 }
 
 .player__seek::-webkit-slider-runnable-track {
-  height: 4px;
+  height: 3px;
   border-radius: 999px;
   background: linear-gradient(
     to right,
@@ -992,7 +1033,7 @@ a:focus-visible {
 }
 
 .player__seek::-moz-range-track {
-  height: 4px;
+  height: 3px;
   border-radius: 999px;
   background: linear-gradient(
     to right,
@@ -1006,32 +1047,71 @@ a:focus-visible {
   cursor: not-allowed;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 960px) {
+  .player {
+    padding: clamp(16px, 5vw, 28px);
+  }
+
+  .player__stage {
+    border-radius: clamp(16px, 4vw, 28px);
+  }
+
   .player__controls {
-    width: min(100%, 420px);
-    grid-template-columns: auto auto;
-    row-gap: clamp(10px, 2vw, 16px);
-    padding: clamp(10px, 3vw, 14px) clamp(16px, 4vw, 20px);
+    border-radius: clamp(22px, 6vw, 38px);
+    padding: clamp(12px, 3vw, 18px) clamp(16px, 4vw, 26px);
+    gap: clamp(14px, 3vw, 24px);
+  }
+}
+
+@media (max-width: 720px) {
+  .player__hud {
+    padding: clamp(18px, 6vw, 28px);
+  }
+
+  .player__controls {
+    grid-template-columns: auto;
+    row-gap: clamp(12px, 4vw, 18px);
+    justify-items: stretch;
   }
 
   .player__timeline {
-    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .player__button {
+    width: clamp(36px, 12vw, 46px);
+    height: clamp(36px, 12vw, 46px);
+    justify-self: start;
+  }
+
+  .player__controls > :last-child {
+    justify-self: end;
   }
 }
 
 @media (max-width: 520px) {
-  .player__controls {
-    width: 100%;
-    border-radius: 20px;
+  .player {
+    padding: clamp(12px, 5vw, 20px);
   }
 
-  .player__button {
-    width: clamp(32px, 12vw, 40px);
-    height: clamp(32px, 12vw, 40px);
+  .player__stage {
+    border-radius: clamp(14px, 6vw, 22px);
+  }
+
+  .player__labels {
+    gap: clamp(6px, 3vw, 12px);
+  }
+
+  .player__label {
+    letter-spacing: 0.14em;
+  }
+
+  .player__controls {
+    border-radius: clamp(18px, 8vw, 26px);
   }
 
   .player__time {
-    font-size: clamp(0.62rem, 3vw, 0.75rem);
+    font-size: clamp(0.62rem, 3.2vw, 0.74rem);
   }
 }
 
