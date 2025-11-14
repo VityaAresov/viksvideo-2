@@ -28,8 +28,12 @@
   --toggle-hover-ring: rgba(153, 234, 72, 0.16);
   --toggle-sun-active: #ffd166;
   --toggle-sun-inactive: rgba(255, 209, 102, 0.66);
+  --toggle-sun-bg: rgba(255, 209, 102, 0.2);
+  --toggle-sun-active-bg: rgba(255, 209, 102, 0.35);
   --toggle-moon-active: #7cc1ff;
   --toggle-moon-inactive: rgba(124, 193, 255, 0.64);
+  --toggle-moon-bg: rgba(124, 193, 255, 0.2);
+  --toggle-moon-active-bg: rgba(124, 193, 255, 0.32);
   --focus-outline: rgba(255, 255, 255, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.35);
   --overlay-foreground: #f5f5f5;
@@ -64,10 +68,14 @@
   --toggle-thumb-border: rgba(16, 16, 16, 0.18);
   --toggle-thumb-shadow: 0 10px 22px rgba(15, 15, 20, 0.14);
   --toggle-hover-ring: rgba(126, 192, 42, 0.16);
-  --toggle-sun-active: #ff9f1c;
-  --toggle-sun-inactive: rgba(255, 159, 28, 0.6);
-  --toggle-moon-active: #4d71ff;
-  --toggle-moon-inactive: rgba(77, 113, 255, 0.58);
+  --toggle-sun-active: #d97706;
+  --toggle-sun-inactive: rgba(217, 119, 6, 0.72);
+  --toggle-sun-bg: rgba(217, 119, 6, 0.2);
+  --toggle-sun-active-bg: rgba(217, 119, 6, 0.38);
+  --toggle-moon-active: #2536d8;
+  --toggle-moon-inactive: rgba(37, 54, 216, 0.7);
+  --toggle-moon-bg: rgba(37, 54, 216, 0.2);
+  --toggle-moon-active-bg: rgba(37, 54, 216, 0.36);
   --focus-outline: rgba(16, 16, 16, 0.35);
   --shadow-elevated: 0 32px 60px rgba(0, 0, 0, 0.08);
   --overlay-foreground: #f5f5f5;
@@ -250,11 +258,6 @@ a:focus-visible {
   background: none;
   color: inherit;
   cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.theme-toggle:hover {
-  transform: translateY(-1px);
 }
 
 .theme-toggle:focus-visible {
@@ -317,16 +320,20 @@ a:focus-visible {
   justify-content: center;
   width: clamp(14px, 1.4vw, 16px);
   height: clamp(14px, 1.4vw, 16px);
+  border-radius: 999px;
+  padding: 2px;
   opacity: 0.72;
   transition: color 0.35s ease, opacity 0.35s ease;
 }
 
 .theme-toggle__icon--sun {
   color: var(--toggle-sun-inactive);
+  background: var(--toggle-sun-bg);
 }
 
 .theme-toggle__icon--moon {
   color: var(--toggle-moon-inactive);
+  background: var(--toggle-moon-bg);
 }
 
 .theme-toggle__icon svg {
@@ -343,11 +350,15 @@ a:focus-visible {
 .theme-toggle[data-theme-toggle-state='light'] .theme-toggle__icon--sun {
   color: var(--toggle-sun-active);
   opacity: 1;
+  background: var(--toggle-sun-active-bg);
+  box-shadow: 0 0 0 1px var(--toggle-sun-active);
 }
 
 .theme-toggle[data-theme-toggle-state='dark'] .theme-toggle__icon--moon {
   color: var(--toggle-moon-active);
   opacity: 1;
+  background: var(--toggle-moon-active-bg);
+  box-shadow: 0 0 0 1px var(--toggle-moon-active);
 }
 
 .site-main {
