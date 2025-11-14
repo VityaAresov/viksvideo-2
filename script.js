@@ -226,8 +226,6 @@ const hideLoader = () => {
   loader.setAttribute('hidden', '');
 };
 
-resetControls();
-
 window.addEventListener('load', () => {
   setTimeout(hideLoader, 800);
 });
@@ -276,6 +274,8 @@ const resetControls = () => {
     totalTimeLabel.textContent = '0:00';
   }
 };
+
+resetControls();
 
 const teardownMediaElement = () => {
   if (detachControlsUpdate) {
