@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact VIKS Production</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="contact">
+    <div class="loader" aria-hidden="true">
+      <div class="loader__inner">
+        <div class="logo logo--loader">
+          <img
+            class="logo__image"
+            data-logo-image
+            src=""
+            alt="VIKS Production"
+          />
+          <span class="sr-only">VIKS Production</span>
+        </div>
+        <div class="loader__spinner"></div>
+      </div>
+    </div>
+
+    <header class="site-header" role="banner">
+      <div class="logo">
+        <img
+          class="logo__image"
+          data-logo-image
+          src=""
+          alt="VIKS Production"
+        />
+        <span class="sr-only">VIKS Production</span>
+      </div>
+    </header>
+
+    <main id="main" class="site-main" role="main">
+      <section class="contact-section contact" aria-labelledby="contact-heading">
+        <div class="contact__container container">
+          <div class="contact__grid">
+            <div class="contact__intro contact-info">
+              <p class="contact__eyebrow">Let’s talk</p>
+              <h1 class="contact__heading" id="contact-heading">
+                Ready to work with
+                <span>VIKS&nbsp;Production?</span>
+              </h1>
+              <p class="contact__lede">
+                We build long-term partnerships that unlock rapid, efficient growth for ambitious brands. Share your goals and
+                our team will tailor a production plan that meets them.
+              </p>
+              <dl class="contact__details">
+                <div class="contact__detail">
+                  <dt class="contact__detail-label">
+                    <span class="contact__icon" aria-hidden="true">☎</span>
+                    Call Us
+                  </dt>
+                  <dd class="contact__detail-value">
+                    <a href="tel:+19715005967">+1 (971) 500 5967</a>
+                  </dd>
+                </div>
+                <div class="contact__detail">
+                  <dt class="contact__detail-label">
+                    <span class="contact__icon" aria-hidden="true">✉</span>
+                    Write To Us
+                  </dt>
+                  <dd class="contact__detail-value">
+                    <a href="mailto:info@viksproduction.com">info@viksproduction.com</a>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div class="contact__form contact-form">
+              <form
+                class="contact-form__body"
+                data-contact-form
+                autocomplete="on"
+              >
+                <div class="contact-form__row">
+                  <div class="contact-form__field">
+                    <label for="first-name" class="contact-form__label">First Name *</label>
+                    <input
+                      type="text"
+                      id="first-name"
+                      name="firstName"
+                      class="contact-form__input"
+                      required
+                      autocomplete="given-name"
+                    />
+                  </div>
+                  <div class="contact-form__field">
+                    <label for="last-name" class="contact-form__label">Last Name</label>
+                    <input
+                      type="text"
+                      id="last-name"
+                      name="lastName"
+                      class="contact-form__input"
+                      autocomplete="family-name"
+                    />
+                  </div>
+                </div>
+                <div class="contact-form__field">
+                  <label for="company-email" class="contact-form__label">Company Email *</label>
+                  <input
+                    type="email"
+                    id="company-email"
+                    name="companyEmail"
+                    class="contact-form__input"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+                <div class="contact-form__field">
+                  <label for="phone-number" class="contact-form__label">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone-number"
+                    name="phoneNumber"
+                    class="contact-form__input"
+                    autocomplete="tel"
+                  />
+                </div>
+                <div class="contact-form__field">
+                  <label for="message" class="contact-form__label">Your Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    class="contact-form__textarea"
+                    required
+                  ></textarea>
+                </div>
+                <label class="contact-form__checkbox">
+                  <input type="checkbox" name="sms_consent" required />
+                  <span>I agree to receive SMS updates and notifications from VIKS Production. Message and data rates may apply.</span>
+                </label>
+                <button type="submit" class="contact-form__submit">Submit Your Message</button>
+                <p class="contact-form__notice">
+                  This site is protected by reCAPTCHA and the Google
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>
+                  and
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">Terms of Service</a>
+                  apply.
+                </p>
+                <p class="contact-form__status" data-form-status aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="site-nav__links">
+          <li>
+            <a href="./index.html" class="site-nav__link" data-nav-page="home">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="./about.html" class="site-nav__link" data-nav-page="about">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="./index.html" class="site-nav__link" data-nav-page="cases">
+              Cases
+            </a>
+          </li>
+          <li>
+            <a
+              href="./contact.html"
+              class="site-nav__link site-nav__link--active"
+              data-nav-page="contact"
+              aria-current="page"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__cta">
+        <p class="site-footer__headline">Get more in your inbox</p>
+        <form class="site-footer__form">
+          <label for="footer-email" class="sr-only">Email</label>
+          <input id="footer-email" type="email" placeholder="Subscribe" required />
+          <button type="submit">→</button>
+        </form>
+      </div>
+      <div class="site-footer__meta">
+        <p>© <span id="year"></span> VIKS Production. All rights reserved.</p>
+        <p>Part of the VIKS Studio Network.</p>
+      </div>
+      <div class="site-footer__links">
+        <a href="https://www.instagram.com/viks_production/" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Behance</a>
+      </div>
+    </footer>
+
+    <script src="logo-config.js"></script>
+    <script src="contact-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
