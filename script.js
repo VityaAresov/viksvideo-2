@@ -117,14 +117,6 @@ const setStoredTheme = (theme) => {
   }
 };
 
-const getSystemTheme = () => {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-    return 'dark';
-  }
-
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-};
-
 const updateLogoSources = (theme) => {
   const nextLogo = logoVariants[theme] || logoVariants.dark || defaultLogoVariants.dark;
 
@@ -177,7 +169,7 @@ const initializeTheme = () => {
 
   const documentTheme = document.documentElement.dataset.theme;
   const normalizedDocumentTheme = documentTheme === 'light' || documentTheme === 'dark' ? documentTheme : '';
-  const startingTheme = normalizedDocumentTheme || storedTheme || getSystemTheme();
+  const startingTheme = normalizedDocumentTheme || storedTheme || 'dark';
 
   applyTheme(startingTheme);
 
