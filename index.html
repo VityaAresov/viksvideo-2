@@ -302,20 +302,6 @@
                   <path d="M7 4.5h4v15H7zm6 0h4v15h-4z" />
                 </svg>
               </button>
-              <div class="player__timeline">
-                <span class="player__time" data-player-time-current>0:00</span>
-                <input
-                  class="player__seek"
-                  type="range"
-                  min="0"
-                  max="0"
-                  value="0"
-                  step="0.01"
-                  data-player-seek
-                  aria-label="Seek"
-                />
-                <span class="player__time" data-player-time-total>0:00</span>
-              </div>
               <button class="player__button player__button--mute" data-player-mute aria-label="Mute video">
                 <svg class="player__icon player__icon--volume" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path
@@ -328,6 +314,20 @@
                   />
                 </svg>
               </button>
+              <div class="player__timeline">
+                <span class="player__time player__time--current" data-player-time-current>0:00</span>
+                <input
+                  class="player__seek"
+                  type="range"
+                  min="0"
+                  max="0"
+                  value="0"
+                  step="0.01"
+                  data-player-seek
+                  aria-label="Seek"
+                />
+                <span class="player__time player__time--total" data-player-time-total>0:00</span>
+              </div>
             </div>
           </div>
         </div>
