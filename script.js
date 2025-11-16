@@ -2,9 +2,6 @@ const loader = document.querySelector('.loader');
 const player = document.querySelector('.player');
 const playerOverlay = document.querySelector('.player__overlay');
 const playerEmbed = document.querySelector('[data-player-embed]');
-const playerClientLabel = document.querySelector('[data-player-client]');
-const playerTitleLabel = document.querySelector('[data-player-title]');
-const playerSeparator = document.querySelector('[data-player-separator]');
 const closeButton = document.querySelector('.player__close');
 const playerControls = document.querySelector('[data-player-controls]');
 const playToggle = document.querySelector('[data-player-toggle]');
@@ -172,23 +169,6 @@ const initializeTheme = () => {
   const startingTheme = normalizedDocumentTheme || storedTheme || 'dark';
 
   applyTheme(startingTheme);
-
-  if (!hasStoredTheme && typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-    const handlePreferenceChange = (event) => {
-      if (hasExplicitThemePreference) {
-        return;
-      }
-
-      applyTheme(event.matches ? 'light' : 'dark');
-    };
-
-    if (typeof mediaQuery.addEventListener === 'function') {
-      mediaQuery.addEventListener('change', handlePreferenceChange);
-    } else if (typeof mediaQuery.addListener === 'function') {
-      mediaQuery.addListener(handlePreferenceChange);
-    }
-  }
 };
 
 initializeTheme();
@@ -781,7 +761,6 @@ const openPlayer = async (item) => {
 
   const src = item.getAttribute('data-video-src');
   const poster = item.getAttribute('data-video-poster');
-  const client = item.getAttribute('data-client');
   const title = item.getAttribute('data-title');
 
   teardownMediaElement();
@@ -805,20 +784,6 @@ const openPlayer = async (item) => {
     activeController.play();
   }
 
-  if (playerClientLabel) {
-    playerClientLabel.textContent = client || '';
-  }
-  if (playerTitleLabel) {
-    playerTitleLabel.textContent = title || '';
-  }
-  if (playerSeparator) {
-    if (client && title) {
-      playerSeparator.removeAttribute('hidden');
-    } else {
-      playerSeparator.setAttribute('hidden', '');
-    }
-  }
-
   player.setAttribute('aria-hidden', 'false');
   playerOverlay.hidden = false;
   document.body.classList.add('no-scroll');
@@ -832,15 +797,6 @@ const closePlayer = () => {
   teardownMediaElement();
   resetControls();
   isScrubbing = false;
-  if (playerClientLabel) {
-    playerClientLabel.textContent = '';
-  }
-  if (playerTitleLabel) {
-    playerTitleLabel.textContent = '';
-  }
-  if (playerSeparator) {
-    playerSeparator.setAttribute('hidden', '');
-  }
   document.body.classList.remove('no-scroll');
 };
 
