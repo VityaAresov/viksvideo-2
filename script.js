@@ -183,6 +183,51 @@ const extractYouTubeId = (url) => {
   return '';
 };
 
+const getYouTubeThumbnailUrl = (videoId, quality = 'hqdefault') => {
+  if (!videoId) return '';
+  return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+};
+
+const youTubeMetadataCache = new Map();
+
+const fetchYouTubeMetadata = (videoId) => {
+  if (!videoId) {
+    return Promise.resolve(null);
+  }
+
+  if (youTubeMetadataCache.has(videoId)) {
+    return youTubeMetadataCache.get(videoId);
+  }
+
+  if (typeof fetch !== 'function') {
+    return Promise.resolve(null);
+  }
+
+  const endpoint = `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`;
+  const request = fetch(endpoint)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to load metadata');
+      }
+      return response.json();
+    })
+    .then((payload) => {
+      if (!payload || typeof payload !== 'object') {
+        return null;
+      }
+
+      return {
+        title: typeof payload.title === 'string' ? payload.title : '',
+        author: typeof payload.author_name === 'string' ? payload.author_name : '',
+        thumbnail: typeof payload.thumbnail_url === 'string' ? payload.thumbnail_url : '',
+      };
+    })
+    .catch(() => null);
+
+  youTubeMetadataCache.set(videoId, request);
+  return request;
+};
+
 const ensurePageStripe = () => {
   if (document.querySelector('.page-stripe')) {
     return;
@@ -311,6 +356,88 @@ document.addEventListener('keydown', (event) => {
 });
 
 const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+
+const updatePortfolioThumbnail = (item, thumbnailUrl) => {
+  if (!item || !thumbnailUrl) return;
+  const image = item.querySelector('.portfolio-item__image');
+  if (image && image.getAttribute('src') !== thumbnailUrl) {
+    image.setAttribute('src', thumbnailUrl);
+  }
+  item.setAttribute('data-video-poster', thumbnailUrl);
+};
+
+const updatePortfolioTitle = (item, title) => {
+  if (!item || typeof title !== 'string') return;
+  const safeTitle = title.trim();
+  if (!safeTitle) return;
+
+  const titleEl = item.querySelector('.portfolio-item__title');
+  if (titleEl && titleEl.textContent !== safeTitle) {
+    titleEl.textContent = safeTitle;
+  }
+
+  item.setAttribute('data-title', safeTitle);
+
+  const image = item.querySelector('.portfolio-item__image');
+  if (image) {
+    image.setAttribute('alt', `YouTube thumbnail for ${safeTitle}`);
+  }
+};
+
+const updatePortfolioClient = (item, client) => {
+  if (!item || typeof client !== 'string') return;
+  const safeClient = client.trim();
+  if (!safeClient) return;
+
+  const clientEl = item.querySelector('.portfolio-item__client');
+  if (clientEl && clientEl.textContent !== safeClient) {
+    clientEl.textContent = safeClient;
+  }
+};
+
+const primePortfolioThumbnails = () => {
+  if (!portfolioItems.length) return;
+
+  portfolioItems.forEach((item) => {
+    const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
+    if (!videoId) return;
+
+    const fallbackThumb = getYouTubeThumbnailUrl(videoId);
+    if (fallbackThumb) {
+      updatePortfolioThumbnail(item, fallbackThumb);
+    }
+  });
+};
+
+const hydratePortfolioMetadata = () => {
+  if (!portfolioItems.length) return;
+
+  portfolioItems.forEach((item) => {
+    const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
+    if (!videoId) return;
+
+    fetchYouTubeMetadata(videoId)
+      .then((metadata) => {
+        if (!metadata) return;
+
+        if (metadata.thumbnail) {
+          updatePortfolioThumbnail(item, metadata.thumbnail);
+        }
+        if (metadata.title) {
+          updatePortfolioTitle(item, metadata.title);
+        }
+        if (metadata.author) {
+          updatePortfolioClient(item, metadata.author);
+        }
+      })
+      .catch(() => {
+        /* ignore metadata errors */
+      });
+  });
+};
+
+primePortfolioThumbnails();
+hydratePortfolioMetadata();
 
 portfolioItems.forEach((item) => {
   item.addEventListener('click', () => openPlayer(item));
