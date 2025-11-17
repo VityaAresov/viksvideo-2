@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7c2d12" />
+      <stop offset="100%" stop-color="#9a3412" />
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="900" fill="url(#grad4)" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffedd5" font-family="'Space Grotesk', 'Inter', sans-serif" font-size="60">
+    Photo 04
+  </text>
+</svg>

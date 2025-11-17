@@ -245,10 +245,18 @@ const sanitizeCaseEntry = (entry) => {
     return null;
   }
 
+  const thumbnail =
+    typeof entry.thumbnail === 'string' && entry.thumbnail.trim().length
+      ? entry.thumbnail.trim()
+      : typeof entry.poster === 'string' && entry.poster.trim().length
+      ? entry.poster.trim()
+      : '';
+
   return {
     src,
     client: typeof entry.client === 'string' ? entry.client.trim() : '',
     title: typeof entry.title === 'string' ? entry.title.trim() : '',
+    thumbnail,
   };
 };
 
@@ -273,12 +281,15 @@ const buildPortfolioItemElement = (data) => {
   article.setAttribute('data-video-src', data.src);
 
   const videoId = extractYouTubeId(data.src);
-  const fallbackPoster = data.poster && typeof data.poster === 'string' && data.poster.trim()
-    ? data.poster.trim()
-    : getYouTubeThumbnailUrl(videoId);
+  const customPoster = data.thumbnail || '';
+  const fallbackPoster = customPoster || getYouTubeThumbnailUrl(videoId);
 
   if (fallbackPoster) {
     article.setAttribute('data-video-poster', fallbackPoster);
+  }
+
+  if (customPoster) {
+    article.setAttribute('data-custom-thumbnail', 'true');
   }
 
   const initialTitle = data.title || 'Loading title…';
@@ -506,6 +517,10 @@ document.addEventListener('keydown', (event) => {
 
 const updatePortfolioThumbnail = (item, thumbnailUrl) => {
   if (!item || !thumbnailUrl) return;
+
+  if (item.getAttribute('data-custom-thumbnail') === 'true') {
+    return;
+  }
   const image = item.querySelector('.portfolio-item__image');
   if (image && image.getAttribute('src') !== thumbnailUrl) {
     image.setAttribute('src', thumbnailUrl);
@@ -535,6 +550,9 @@ const primePortfolioThumbnails = () => {
   if (!portfolioItems.length) return;
 
   portfolioItems.forEach((item) => {
+    if (item.getAttribute('data-custom-thumbnail') === 'true') {
+      return;
+    }
     const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
     if (!videoId) return;
 
@@ -549,6 +567,9 @@ const hydratePortfolioMetadata = () => {
   if (!portfolioItems.length) return;
 
   portfolioItems.forEach((item) => {
+    if (item.getAttribute('data-custom-thumbnail') === 'true') {
+      return;
+    }
     const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
     if (!videoId) return;
 

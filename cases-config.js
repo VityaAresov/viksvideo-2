@@ -2,6 +2,8 @@
 // how many cards appear on the Cases page.
 // Each entry should point to a YouTube link from the VIKS Production channel
 // and can optionally include fallback client and title text.
+// To use a custom thumbnail, drop an image inside `assets/cases-thumbnails/`
+// and set `thumbnail: 'assets/cases-thumbnails/your-file.jpg'` on the entry.
 window.VIKS_CASE_VIDEOS = [
   {
     src: 'https://www.youtube.com/watch?v=wDHWcnnLqG8',
