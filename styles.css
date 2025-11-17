@@ -722,24 +722,6 @@ a:focus-visible {
   box-shadow: 0 50px 110px rgba(0, 0, 0, 0.55);
 }
 
-.player__close {
-  position: absolute;
-  top: clamp(14px, 2vw, 28px);
-  right: clamp(14px, 2vw, 28px);
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: clamp(34px, 3.5vw, 44px);
-  height: clamp(34px, 3.5vw, 44px);
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 0.92);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-  pointer-events: auto;
-  z-index: 2;
-}
-
 .player__exit {
   position: relative;
   padding: 0.55rem 1.5rem;
@@ -769,21 +751,6 @@ a:focus-visible {
 
 .player__exit:active {
   transform: scale(0.98);
-}
-
-.player__close svg {
-  width: clamp(18px, 2vw, 22px);
-  height: clamp(18px, 2vw, 22px);
-  stroke: currentColor;
-  stroke-width: 1.8px;
-  stroke-linecap: round;
-}
-
-.player__close:hover,
-.player__close:focus-visible {
-  background: rgba(0, 0, 0, 0.75);
-  border-color: rgba(255, 255, 255, 0.38);
-  color: #fff;
 }
 
 .player__embed {
