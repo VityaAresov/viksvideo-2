@@ -2,7 +2,7 @@ const loader = document.querySelector('.loader');
 const player = document.querySelector('.player');
 const playerOverlay = document.querySelector('.player__overlay');
 const playerEmbed = document.querySelector('[data-player-embed]');
-const closeButton = document.querySelector('.player__close');
+const closeButtons = Array.from(document.querySelectorAll('[data-player-close]'));
 const year = document.getElementById('year');
 const logoImages = Array.from(document.querySelectorAll('[data-logo-image]'));
 
@@ -300,7 +300,9 @@ const closePlayer = () => {
 };
 
 playerOverlay?.addEventListener('click', closePlayer);
-closeButton?.addEventListener('click', closePlayer);
+closeButtons.forEach((button) => {
+  button.addEventListener('click', closePlayer);
+});
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && player?.getAttribute('aria-hidden') === 'false') {

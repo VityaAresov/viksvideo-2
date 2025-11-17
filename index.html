@@ -277,10 +277,13 @@
     <div class="player" role="dialog" aria-modal="true" aria-hidden="true">
       <div class="player__inner">
         <div class="player__stage">
-          <button class="player__close" aria-label="Close video">
+          <button class="player__close" type="button" data-player-close aria-label="Close video">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M6 6l12 12M18 6 6 18" fill="none" />
             </svg>
+          </button>
+          <button class="player__exit" type="button" data-player-close>
+            Exit video
           </button>
           <div class="player__embed" data-player-embed></div>
         </div>
