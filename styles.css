@@ -1790,14 +1790,14 @@ a:focus-visible {
 }
 
 .ces-hero {
-  padding: clamp(120px, 14vh, 160px) 0 clamp(72px, 10vh, 108px);
+  padding: clamp(120px, 14vh, 160px) 0 clamp(96px, 12vh, 132px);
 }
 
 .ces-hero__container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: clamp(28px, 4vw, 52px);
-  align-items: start;
+  align-items: center;
   text-align: center;
 }
 
@@ -1853,8 +1853,9 @@ a:focus-visible {
 
 .ces-hero__media {
   display: grid;
-  gap: 18px;
+  gap: 14px;
   justify-items: center;
+  align-content: start;
 }
 
 .ces-hero__image {
@@ -1893,6 +1894,8 @@ a:focus-visible {
 
 .ces-hero__badge {
   justify-self: center;
+  width: 100%;
+  max-width: 520px;
 }
 
 .ces-hero__badge-inner {
@@ -1902,7 +1905,8 @@ a:focus-visible {
   padding: 22px 26px;
   box-shadow: var(--shadow-elevated);
   color: var(--text-primary);
-  max-width: 380px;
+  max-width: 520px;
+  width: 100%;
 }
 
 .ces-hero__badge-title {
@@ -1920,14 +1924,14 @@ a:focus-visible {
 }
 
 .ces-section {
-  padding: clamp(72px, 11vh, 110px) 0;
+  padding: clamp(88px, 12vh, 136px) 0;
 }
 
 .ces-section__header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 28px;
+  gap: 10px;
+  margin-bottom: 36px;
   align-items: center;
   text-align: center;
 }
@@ -1953,7 +1957,7 @@ a:focus-visible {
   grid-template-columns: repeat(3, auto);
   align-items: center;
   gap: 12px;
-  margin: 24px auto 0;
+  margin: 28px auto 0;
   padding: 12px 14px;
   border-radius: 14px;
   border: 1px solid var(--border-muted);
@@ -2071,6 +2075,7 @@ a:focus-visible {
 
 .ces-card__cta {
   margin-top: auto;
+  width: 100%;
 }
 
 .ces-card--pricing {
@@ -2081,6 +2086,8 @@ a:focus-visible {
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   text-align: center;
   align-items: center;
+  justify-content: space-between;
+  min-height: 100%;
 }
 
 .ces-card--featured {
@@ -2093,18 +2100,18 @@ a:focus-visible {
   border-color: var(--border-muted);
 }
 
-.ces-card__badge {
-  align-self: flex-start;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border-muted);
-  background: var(--surface-glass);
-  color: var(--text-secondary);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-top: 6px;
-}
+  .ces-card__badge {
+    align-self: flex-start;
+    padding: 5px 9px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--highlight);
+    color: #0a0a0a;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
 
 .ces-card__price {
   margin: -2px 0 2px;
@@ -2121,7 +2128,7 @@ a:focus-visible {
 }
 
 .ces-grid--pricing {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: clamp(18px, 2vw, 26px);
   perspective: 1400px;
 }
@@ -2133,6 +2140,10 @@ a:focus-visible {
   border-color: var(--highlight);
 }
 
+body[data-page='ces'] .site-main {
+  padding-bottom: 170px;
+}
+
 .ces-logos {
   display: flex;
   flex-wrap: wrap;
@@ -2140,13 +2151,15 @@ a:focus-visible {
 }
 
 .ces-logos__item {
-  padding: 12px 16px;
-  border-radius: 14px;
-  border: 1px solid var(--border-muted);
-  background: var(--surface-glass);
+  padding: 6px 2px;
+  border-radius: 10px;
   color: var(--text-secondary);
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+  border: none;
+  background: transparent;
+  cursor: default;
 }
 
 .ces-button {
@@ -2206,6 +2219,24 @@ a:focus-visible {
 
 .ces-contact__form .contact-form__status {
   margin: 0;
+}
+
+@media (min-width: 1180px) {
+  .ces-grid--pricing {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .ces-grid--pricing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .ces-grid--pricing {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 1024px) {
