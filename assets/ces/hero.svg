@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Crowd at CES with glowing signage">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1016" />
+      <stop offset="45%" stop-color="#0f1822" />
+      <stop offset="100%" stop-color="#0d1118" />
+    </linearGradient>
+    <linearGradient id="wash" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6ee77a" stop-opacity="0.35" />
+      <stop offset="50%" stop-color="#3ad5ff" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#1f7cff" stop-opacity="0.12" />
+    </linearGradient>
+    <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.06" />
+      </feComponentTransfer>
+    </filter>
+    <radialGradient id="spot" cx="0.5" cy="0.3" r="0.9">
+      <stop offset="0%" stop-color="#7bf58f" stop-opacity="0.36" />
+      <stop offset="55%" stop-color="#4b9dff" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0b0f14" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <rect width="1600" height="1000" fill="url(#spot)" />
+  <rect width="1600" height="1000" fill="url(#wash)" opacity="0.4" />
+
+  <g opacity="0.82">
+    <rect x="140" y="300" width="1100" height="340" rx="38" fill="#0f1620" stroke="#1f2f3f" stroke-width="6" />
+    <rect x="190" y="336" width="940" height="268" rx="32" fill="#131c28" stroke="#1c2c3b" stroke-width="6" />
+    <rect x="240" y="368" width="720" height="204" rx="28" fill="#0c1520" />
+    <rect x="940" y="410" width="250" height="90" rx="14" fill="#1e2f44" opacity="0.6" />
+    <rect x="252" y="380" width="310" height="180" rx="22" fill="#0f1824" stroke="#24384b" stroke-width="4" />
+    <rect x="580" y="380" width="360" height="180" rx="22" fill="#0f1824" stroke="#24384b" stroke-width="4" />
+    <rect x="262" y="392" width="290" height="140" rx="18" fill="#090f18" opacity="0.7" />
+    <rect x="592" y="392" width="328" height="140" rx="18" fill="#090f18" opacity="0.7" />
+    <rect x="968" y="436" width="200" height="52" rx="12" fill="#0a0e14" opacity="0.5" />
+    <rect x="968" y="504" width="164" height="30" rx="10" fill="#0a0e14" opacity="0.38" />
+  </g>
+
+  <g filter="url(#grain)">
+    <rect width="1600" height="1000" fill="#000" opacity="0.05" />
+  </g>
+
+  <g opacity="0.9">
+    <path d="M132 736c48 6 96 34 146 30 98-8 136-142 232-154 78-10 153 100 233 104 90 4 152-138 240-134 73 4 120 116 196 138 66 20 133-26 193-54v200H132V736Z" fill="#070b10" />
+    <path d="M0 780c82 12 166 70 250 64 110-8 156-170 265-184 88-12 176 116 267 120 102 4 171-156 270-150 82 6 134 130 218 154 74 22 150-30 230-62v278H0V780Z" fill="#0b1118" opacity="0.78" />
+    <rect x="104" y="720" width="70" height="160" rx="18" fill="#121923" />
+    <rect x="250" y="702" width="64" height="182" rx="18" fill="#0f1720" />
+    <rect x="410" y="698" width="66" height="186" rx="18" fill="#131d27" />
+    <rect x="576" y="726" width="68" height="164" rx="18" fill="#0e1620" />
+    <rect x="742" y="712" width="66" height="178" rx="18" fill="#141e28" />
+    <rect x="908" y="708" width="66" height="182" rx="18" fill="#0d141e" />
+    <rect x="1076" y="724" width="66" height="166" rx="18" fill="#111a24" />
+    <rect x="1240" y="708" width="66" height="182" rx="18" fill="#0d141d" />
+  </g>
+
+  <g transform="translate(280 420)" opacity="0.9">
+    <rect x="14" y="-12" width="380" height="190" rx="26" fill="#0a1119" stroke="#1f3041" stroke-width="6" />
+    <rect x="200" y="-48" width="310" height="220" rx="28" fill="#0b121b" stroke="#233447" stroke-width="8" />
+    <rect x="214" y="-36" width="290" height="200" rx="24" fill="#0f1c29" />
+    <path d="M226 48h210l46-136H272z" fill="#8bf36b" opacity="0.7" />
+    <path d="M252 60h230l44-140H296z" fill="#49c9ff" opacity="0.8" />
+    <text x="368" y="84" font-family="'Space Grotesk','Inter',sans-serif" font-size="92" font-weight="700" text-anchor="middle" fill="#0a0a0a" opacity="0.35">CES</text>
+    <text x="368" y="80" font-family="'Space Grotesk','Inter',sans-serif" font-size="92" font-weight="700" text-anchor="middle" fill="#f5f7fb">CES</text>
+  </g>
+
+  <g opacity="0.7">
+    <circle cx="360" cy="280" r="80" fill="#45d0ff" opacity="0.12" />
+    <circle cx="1140" cy="260" r="120" fill="#7bf58f" opacity="0.16" />
+    <circle cx="1320" cy="480" r="120" fill="#3aa0ff" opacity="0.12" />
+  </g>
+
+  <g opacity="0.9">
+    <circle cx="360" cy="296" r="6" fill="#9bf85c" />
+    <circle cx="412" cy="312" r="5" fill="#4bd3ff" />
+    <circle cx="480" cy="284" r="6" fill="#9bf85c" />
+    <circle cx="540" cy="302" r="5" fill="#4bd3ff" />
+    <circle cx="620" cy="292" r="6" fill="#9bf85c" />
+    <circle cx="700" cy="286" r="5" fill="#4bd3ff" />
+    <circle cx="780" cy="298" r="6" fill="#9bf85c" />
+    <circle cx="860" cy="304" r="5" fill="#4bd3ff" />
+    <circle cx="940" cy="292" r="6" fill="#9bf85c" />
+    <circle cx="1020" cy="306" r="5" fill="#4bd3ff" />
+  </g>
+
+  <rect width="1600" height="1000" fill="url(#grain)" opacity="0.25" />
+</svg>
