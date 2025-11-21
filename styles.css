@@ -1970,9 +1970,10 @@ a:focus-visible {
 }
 
 .ces-pricing__spots {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   padding: 10px 16px;
   margin: 0 auto 22px;
   border-radius: 999px;
@@ -2193,7 +2194,7 @@ body[data-page='ces'] .site-main {
 .ces-contact__grid {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: clamp(28px, 3.8vw, 48px);
+  gap: clamp(36px, 5vw, 72px);
   align-items: start;
 }
 
