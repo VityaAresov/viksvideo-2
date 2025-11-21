@@ -2,44 +2,391 @@ const loader = document.querySelector('.loader');
 const player = document.querySelector('.player');
 const playerOverlay = document.querySelector('.player__overlay');
 const playerEmbed = document.querySelector('[data-player-embed]');
-const playerClientLabel = document.querySelector('[data-player-client]');
-const playerTitleLabel = document.querySelector('[data-player-title]');
-const closeButton = document.querySelector('.player__close');
+const closeButtons = Array.from(document.querySelectorAll('[data-player-close]'));
 const year = document.getElementById('year');
 const logoImages = Array.from(document.querySelectorAll('[data-logo-image]'));
+const portfolioGrid =
+  document.querySelector('[data-portfolio-grid]') || document.querySelector('.portfolio__grid');
 
-const DEFAULT_LOGO_INLINE_SVG = `
+const DEFAULT_LOGO_SVG_DARK = `
   <svg id="\u0421\u043b\u043e\u0439_1" data-name="\u0421\u043b\u043e\u0439 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-    <g fill="white">
-      <path d="M48.66,34.44h9.23L41.21,88.33h-12Z"/>
-      <path d="M116.06,54.41c-5.11-3.76-11.47-3.17-15.17-2a19,19,0,0,0-6,3.51c-2.87,2.41-5.75,6.4-5.53,11,.36,7.8,9.18,5.68,12.93,10.36a8.61,8.61,0,0,1,1,9.5,6,6,0,0,1-7.14,3.39A7.94,7.94,0,0,1,93.45,89c-3.59-2.46-6.27-6.81-8.55-10.79C82,73.13,78.19,67,78.25,62.93c0-2.91,5.18-6.82,10.77-11.5,3.46-2.89,5.32-4.7,11.08-9.88,2.59-2.33,7.78-7.11,7.78-7.11h-13s-4.65,5.36-7.78,9.17c0,0-1.71,2.07-5,5.82-5.2,6-9.88,9.63-12.15,9.18a.88.88,0,0,1-.23-.07c-2.12-.94-.29-6.45,1.76-11.59,1.15-2.87,6.27-12.51,6.27-12.51H66.16L49.48,88.33H61.1A78.33,78.33,0,0,1,63.22,76.4c.76-2.92,2.83-11.65,5.44-11.65,2,0,4.22,2.61,6,11.86C76,83.08,79,90.77,82.76,94c8.66,7.33,19.3,4.14,23.89,2.12,4.76-2.1,7.87-6.19,8.43-9.58,1.38-8.36-5-12.89-9-14.95s-5.55-3.92-5.68-6.75c-.18-3.79,2.42-8.42,6.81-9.13,2.17-.36,5.19.18,5.75,2.28.61,2.29-4.59,7.34-4.59,7.34h10.1S122.85,59.41,116.06,54.41Z"/>
-      <path d="M15.64,40c1.52,10.23,4.69,18.58,7.21,18.58s4.19-2.16,7.68-16C32.63,34.3,35,21.48,35,21.48H45.56L26.62,72.25H16.5L.14,21.48H14.08A156.14,156.14,0,0,0,15.64,40Z"/>
+    <g fill="#f5f5f5">
+      <path d="M48.66,34.44h9.23L41.21,88.33h-12Z" />
+      <path d="M116.06,54.41c-5.11-3.76-11.47-3.17-15.17-2a19,19,0,0,0-6,3.51c-2.87,2.41-5.75,6.4-5.53,11,.36,7.8,9.18,5.68,12.93,10.36a8.61,8.61,0,0,1,1,9.5,6,6,0,0,1-7.14,3.39A7.94,7.94,0,0,1,93.45,89c-3.59-2.46-6.27-6.81-8.55-10.79C82,73.13,78.19,67,78.25,62.93c0-2.91,5.18-6.82,10.77-11.5,3.46-2.89,5.32-4.7,11.08-9.88,2.59-2.33,7.78-7.11,7.78-7.11h-13s-4.65,5.36-7.78,9.17c0,0-1.71,2.07-5,5.82-5.2,6-9.88,9.63-12.15,9.18a.88.88,0,0,1-.23-.07c-2.12-.94-.29-6.45,1.76-11.59,1.15-2.87,6.27-12.51,6.27-12.51H66.16L49.48,88.33H61.1A78.33,78.33,0,0,1,63.22,76.4c.76-2.92,2.83-11.65,5.44-11.65,2,0,4.22,2.61,6,11.86C76,83.08,79,90.77,82.76,94c8.66,7.33,19.3,4.14,23.89,2.12,4.76-2.1,7.87-6.19,8.43-9.58,1.38-8.36-5-12.89-9-14.95s-5.55-3.92-5.68-6.75c-.18-3.79,2.42-8.42,6.81-9.13,2.17-.36,5.19.18,5.75,2.28.61,2.29-4.59,7.34-4.59,7.34h10.1S122.85,59.41,116.06,54.41Z" />
+      <path d="M15.64,40c1.52,10.23,4.69,18.58,7.21,18.58s4.19-2.16,7.68-16C32.63,34.3,35,21.48,35,21.48H45.56L26.62,72.25H16.5L.14,21.48H14.08A156.14,156.14,0,0,0,15.64,40Z" />
     </g>
   </svg>
 `;
 
-const DEFAULT_LOGO_DATA_URI =
-  'data:image/svg+xml;utf8,' + encodeURIComponent(DEFAULT_LOGO_INLINE_SVG);
+const DEFAULT_LOGO_SVG_LIGHT = `
+  <svg id="\u0421\u043b\u043e\u0439_1" data-name="\u0421\u043b\u043e\u0439 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+    <g fill="#101010">
+      <path d="M48.66,34.44h9.23L41.21,88.33h-12Z" />
+      <path d="M116.06,54.41c-5.11-3.76-11.47-3.17-15.17-2a19,19,0,0,0-6,3.51c-2.87,2.41-5.75,6.4-5.53,11,.36,7.8,9.18,5.68,12.93,10.36a8.61,8.61,0,0,1,1,9.5,6,6,0,0,1-7.14,3.39A7.94,7.94,0,0,1,93.45,89c-3.59-2.46-6.27-6.81-8.55-10.79C82,73.13,78.19,67,78.25,62.93c0-2.91,5.18-6.82,10.77-11.5,3.46-2.89,5.32-4.7,11.08-9.88,2.59-2.33,7.78-7.11,7.78-7.11h-13s-4.65,5.36-7.78,9.17c0,0-1.71,2.07-5,5.82-5.2,6-9.88,9.63-12.15,9.18a.88.88,0,0,1-.23-.07c-2.12-.94-.29-6.45,1.76-11.59,1.15-2.87,6.27-12.51,6.27-12.51H66.16L49.48,88.33H61.1A78.33,78.33,0,0,1,63.22,76.4c.76-2.92,2.83-11.65,5.44-11.65,2,0,4.22,2.61,6,11.86C76,83.08,79,90.77,82.76,94c8.66,7.33,19.3,4.14,23.89,2.12,4.76-2.1,7.87-6.19,8.43-9.58,1.38-8.36-5-12.89-9-14.95s-5.55-3.92-5.68-6.75c-.18-3.79,2.42-8.42,6.81-9.13,2.17-.36,5.19.18,5.75,2.28.61,2.29-4.59,7.34-4.59,7.34h10.1S122.85,59.41,116.06,54.41Z" />
+      <path d="M15.64,40c1.52,10.23,4.69,18.58,7.21,18.58s4.19-2.16,7.68-16C32.63,34.3,35,21.48,35,21.48H45.56L26.62,72.25H16.5L.14,21.48H14.08A156.14,156.14,0,0,0,15.64,40Z" />
+    </g>
+  </svg>
+`;
 
-const customInlineSvg =
-  typeof window !== 'undefined' && typeof window.VIKS_LOGO_INLINE_SVG === 'string'
-    ? window.VIKS_LOGO_INLINE_SVG.trim()
-    : '';
+const toDataUri = (svg) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
-const inlineSvgDataUri = customInlineSvg
-  ? `data:image/svg+xml;utf8,${encodeURIComponent(customInlineSvg)}`
-  : '';
+const defaultLogoVariants = {
+  dark: toDataUri(DEFAULT_LOGO_SVG_DARK),
+  light: toDataUri(DEFAULT_LOGO_SVG_LIGHT),
+};
 
-const customLogo =
-  typeof window !== 'undefined' && typeof window.VIKS_LOGO_DATA_URI === 'string'
-    ? window.VIKS_LOGO_DATA_URI.trim()
-    : '';
+const resolveLogoVariants = () => {
+  if (typeof window === 'undefined') {
+    return defaultLogoVariants;
+  }
 
-const logoSrc = inlineSvgDataUri || customLogo || DEFAULT_LOGO_DATA_URI;
+  const explicitVariants =
+    typeof window.VIKS_LOGO_VARIANTS === 'object' && window.VIKS_LOGO_VARIANTS !== null
+      ? window.VIKS_LOGO_VARIANTS
+      : null;
 
-logoImages.forEach((img) => {
-  img.setAttribute('src', logoSrc);
+  if (explicitVariants) {
+    const variants = { ...defaultLogoVariants };
+    const darkVariant =
+      typeof explicitVariants.dark === 'string' && explicitVariants.dark.trim().length > 0
+        ? explicitVariants.dark.trim()
+        : '';
+    const lightVariant =
+      typeof explicitVariants.light === 'string' && explicitVariants.light.trim().length > 0
+        ? explicitVariants.light.trim()
+        : '';
+
+    if (darkVariant) {
+      variants.dark = darkVariant;
+    }
+    if (lightVariant) {
+      variants.light = lightVariant;
+    }
+
+    if (!darkVariant && lightVariant) {
+      variants.dark = lightVariant;
+    }
+    if (!lightVariant && darkVariant) {
+      variants.light = darkVariant;
+    }
+
+    return variants;
+  }
+
+  const inlineSvg =
+    typeof window.VIKS_LOGO_INLINE_SVG === 'string' ? window.VIKS_LOGO_INLINE_SVG.trim() : '';
+  const inlineSvgDataUri = inlineSvg ? toDataUri(inlineSvg) : '';
+
+  const customLogo =
+    typeof window.VIKS_LOGO_DATA_URI === 'string' ? window.VIKS_LOGO_DATA_URI.trim() : '';
+
+  const singleLogo = inlineSvgDataUri || customLogo;
+  if (singleLogo) {
+    return { dark: singleLogo, light: singleLogo };
+  }
+
+  return defaultLogoVariants;
+};
+
+const logoVariants = resolveLogoVariants();
+
+const themeToggleButtons = Array.from(document.querySelectorAll('[data-theme-toggle]'));
+
+const updateLogoSources = (theme) => {
+  const nextLogo = logoVariants[theme] || logoVariants.dark || defaultLogoVariants.dark;
+
+  logoImages.forEach((img) => {
+    if (!img) return;
+    if (img.getAttribute('src') !== nextLogo) {
+      img.setAttribute('src', nextLogo);
+    }
+  });
+};
+
+const updateThemeToggles = (theme) => {
+  themeToggleButtons.forEach((button) => {
+    button.setAttribute('data-theme-toggle-state', theme);
+    button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+
+    const label = button.querySelector('[data-theme-toggle-label]');
+    const nextLabel = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+    button.setAttribute('aria-label', nextLabel);
+    button.setAttribute('title', nextLabel);
+    if (label) {
+      label.textContent = nextLabel;
+    }
+  });
+};
+
+const applyTheme = (theme) => {
+  const normalizedTheme = theme === 'light' ? 'light' : 'dark';
+
+  document.documentElement.dataset.theme = normalizedTheme;
+  if (document.body) {
+    document.body.dataset.theme = normalizedTheme;
+  }
+
+  updateLogoSources(normalizedTheme);
+  updateThemeToggles(normalizedTheme);
+};
+
+const initializeTheme = () => {
+  const documentTheme = document.documentElement.dataset.theme;
+  const normalizedDocumentTheme =
+    documentTheme === 'light' || documentTheme === 'dark' ? documentTheme : 'dark';
+  const startingTheme = normalizedDocumentTheme || 'dark';
+
+  applyTheme(startingTheme);
+};
+
+initializeTheme();
+
+themeToggleButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const currentTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(nextTheme);
+  });
 });
+
+const extractYouTubeId = (url) => {
+  if (typeof url !== 'string') {
+    return '';
+  }
+
+  const value = url.trim();
+  if (!value) {
+    return '';
+  }
+
+  const directMatch = value.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|shorts\/|v\/|.*[?&]v=))([A-Za-z0-9_-]{11})/
+  );
+  if (directMatch && directMatch[1]) {
+    return directMatch[1];
+  }
+
+  try {
+    const parsed = new URL(value);
+    const searchId = parsed.searchParams.get('v');
+    if (searchId && /^[A-Za-z0-9_-]{11}$/.test(searchId)) {
+      return searchId;
+    }
+
+    const segments = parsed.pathname.split('/').filter(Boolean);
+    const candidate = segments.pop();
+    if (candidate && /^[A-Za-z0-9_-]{11}$/.test(candidate)) {
+      return candidate;
+    }
+  } catch (error) {
+    /* ignore malformed URLs */
+  }
+
+  return '';
+};
+
+const getYouTubeThumbnailUrl = (videoId, quality = 'hqdefault') => {
+  if (!videoId) return '';
+  return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+};
+
+const DEFAULT_PORTFOLIO_CASES = [
+  {
+    src: 'https://www.youtube.com/watch?v=wDHWcnnLqG8',
+    client: 'ABF',
+    title: 'American Business Forum',
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=7pBXqY0euGA',
+    client: 'Red Bull',
+    title: 'SKYLINE STORIES',
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=cWvlf4zZcEQ',
+    client: 'Spotify',
+    title: 'FEEL THE BEAT',
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=QXFhYLTxozk',
+    client: 'National Geographic',
+    title: 'EDGE OF LIGHT',
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=jl7WxcoebQ0',
+    client: 'BBC',
+    title: 'MORNING BREAK',
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=LOAreXKUSy4',
+    client: 'Tesla',
+    title: 'CITY CURRENT',
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=s29DdD4tJXo',
+    client: 'Louis Vuitton',
+    title: 'CONSTELLATION',
+  },
+];
+
+const sanitizeCaseEntry = (entry) => {
+  if (!entry) return null;
+
+  if (typeof entry === 'string') {
+    const src = entry.trim();
+    return src ? { src, client: '', title: '' } : null;
+  }
+
+  if (typeof entry !== 'object') {
+    return null;
+  }
+
+  const src = typeof entry.src === 'string' ? entry.src.trim() : '';
+  if (!src) {
+    return null;
+  }
+
+  const thumbnail =
+    typeof entry.thumbnail === 'string' && entry.thumbnail.trim().length
+      ? entry.thumbnail.trim()
+      : typeof entry.poster === 'string' && entry.poster.trim().length
+      ? entry.poster.trim()
+      : '';
+
+  return {
+    src,
+    client: typeof entry.client === 'string' ? entry.client.trim() : '',
+    title: typeof entry.title === 'string' ? entry.title.trim() : '',
+    thumbnail,
+  };
+};
+
+const getConfiguredCaseVideos = () => {
+  const configuredList =
+    typeof window !== 'undefined' && Array.isArray(window.VIKS_CASE_VIDEOS)
+      ? window.VIKS_CASE_VIDEOS
+      : null;
+
+  const source = configuredList && configuredList.length ? configuredList : DEFAULT_PORTFOLIO_CASES;
+
+  return source.map((entry) => sanitizeCaseEntry(entry)).filter(Boolean);
+};
+
+const buildPortfolioItemElement = (data) => {
+  if (!data || !data.src) {
+    return null;
+  }
+
+  const article = document.createElement('article');
+  article.className = 'portfolio-item';
+  article.setAttribute('data-video-src', data.src);
+
+  const videoId = extractYouTubeId(data.src);
+  const customPoster = data.thumbnail || '';
+  const fallbackPoster = customPoster || getYouTubeThumbnailUrl(videoId);
+
+  if (fallbackPoster) {
+    article.setAttribute('data-video-poster', fallbackPoster);
+  }
+
+  if (customPoster) {
+    article.setAttribute('data-custom-thumbnail', 'true');
+  }
+
+  const initialTitle = data.title || 'Loading title…';
+  article.setAttribute('data-title', initialTitle);
+
+  const media = document.createElement('div');
+  media.className = 'portfolio-item__media';
+
+  const image = document.createElement('img');
+  image.className = 'portfolio-item__image';
+  image.loading = 'lazy';
+  image.alt = `YouTube thumbnail for ${initialTitle}`;
+  if (fallbackPoster) {
+    image.src = fallbackPoster;
+  }
+
+  media.appendChild(image);
+
+  const meta = document.createElement('div');
+  meta.className = 'portfolio-item__meta';
+
+  const clientLabel = typeof data.client === 'string' ? data.client.trim() : '';
+  if (clientLabel) {
+    const client = document.createElement('p');
+    client.className = 'portfolio-item__client';
+    client.textContent = clientLabel;
+    meta.appendChild(client);
+  }
+
+  const title = document.createElement('h2');
+  title.className = 'portfolio-item__title';
+  title.textContent = initialTitle;
+  meta.appendChild(title);
+
+  article.appendChild(media);
+  article.appendChild(meta);
+
+  return article;
+};
+
+const renderPortfolioItems = () => {
+  if (!portfolioGrid) {
+    return [];
+  }
+
+  const entries = getConfiguredCaseVideos();
+  portfolioGrid.innerHTML = '';
+
+  const items = entries
+    .map((entry) => buildPortfolioItemElement(entry))
+    .filter((element) => element !== null);
+
+  items.forEach((element) => {
+    portfolioGrid.appendChild(element);
+  });
+
+  return items;
+};
+
+const youTubeMetadataCache = new Map();
+
+const fetchYouTubeMetadata = (videoId) => {
+  if (!videoId) {
+    return Promise.resolve(null);
+  }
+
+  if (youTubeMetadataCache.has(videoId)) {
+    return youTubeMetadataCache.get(videoId);
+  }
+
+  if (typeof fetch !== 'function') {
+    return Promise.resolve(null);
+  }
+
+  const endpoint = `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`;
+  const request = fetch(endpoint)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to load metadata');
+      }
+      return response.json();
+    })
+    .then((payload) => {
+      if (!payload || typeof payload !== 'object') {
+        return null;
+      }
+
+      return {
+        title: typeof payload.title === 'string' ? payload.title : '',
+        thumbnail: typeof payload.thumbnail_url === 'string' ? payload.thumbnail_url : '',
+      };
+    })
+    .catch(() => null);
+
+  youTubeMetadataCache.set(videoId, request);
+  return request;
+};
 
 const ensurePageStripe = () => {
   if (document.querySelector('.page-stripe')) {
@@ -70,7 +417,13 @@ if (year) {
 let activeMediaElement = null;
 
 const teardownMediaElement = () => {
-  if (!playerEmbed || !activeMediaElement) return;
+  if (!playerEmbed || !activeMediaElement) {
+    return;
+  }
+
+  if (activeMediaElement.tagName === 'IFRAME') {
+    activeMediaElement.setAttribute('src', 'about:blank');
+  }
 
   if (activeMediaElement.tagName === 'VIDEO') {
     activeMediaElement.pause();
@@ -82,109 +435,60 @@ const teardownMediaElement = () => {
   activeMediaElement = null;
 };
 
-const extractYouTubeId = (url) => {
-  try {
-    const parsed = new URL(url);
-
-    if (parsed.hostname.includes('youtu.be')) {
-      return parsed.pathname.replace('/', '');
-    }
-
-    if (parsed.searchParams.has('v')) {
-      return parsed.searchParams.get('v');
-    }
-
-    const pathParts = parsed.pathname.split('/');
-    const embedIndex = pathParts.indexOf('embed');
-
-    if (embedIndex !== -1 && pathParts.length > embedIndex + 1) {
-      return pathParts[embedIndex + 1];
-    }
-  } catch (error) {
-    return '';
-  }
-
-  return '';
-};
-
-const buildYouTubeIframe = (videoId, title = '') => {
-  if (!videoId) return null;
-
-  const params = new URLSearchParams({
-    autoplay: '1',
-    rel: '0',
-    playsinline: '1',
-    modestbranding: '1',
-  });
-
-  const iframe = document.createElement('iframe');
-  iframe.className = 'player__iframe';
-  iframe.src = `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
-  iframe.allow =
-    'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-  iframe.setAttribute('allowfullscreen', '');
-  iframe.title = title ? `${title} — YouTube` : 'YouTube video player';
-
-  return iframe;
-};
-
 const buildVideoElement = (src, poster = '') => {
   const video = document.createElement('video');
   video.className = 'player__video';
   video.controls = true;
+  video.autoplay = true;
   video.playsInline = true;
+  video.preload = 'metadata';
   video.src = src;
   if (poster) {
     video.poster = poster;
   }
 
-  video.addEventListener(
-    'canplay',
-    () => {
-      video.play().catch(() => video.pause());
-    },
-    { once: true }
-  );
-
   return video;
 };
 
-const createMediaElement = (src, poster, title) => {
+const buildYouTubeEmbed = (src, title = '') => {
+  const videoId = extractYouTubeId(src);
+  if (!videoId) return null;
+
+  const iframe = document.createElement('iframe');
+  iframe.className = 'player__embed-frame';
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.title = title ? `${title} — YouTube` : 'YouTube video player';
+
+  return iframe;
+};
+
+const createMediaElement = (src, poster = '', title = '') => {
   if (!src) return null;
 
   if (/youtu\.be|youtube\.com/i.test(src)) {
-    const videoId = extractYouTubeId(src);
-    return buildYouTubeIframe(videoId, title);
+    return buildYouTubeEmbed(src, title);
   }
 
   return buildVideoElement(src, poster);
 };
 
 const openPlayer = (item) => {
-  if (!player || !playerEmbed || !playerOverlay) return;
+  if (!player || !playerEmbed || !playerOverlay || !item) return;
 
   const src = item.getAttribute('data-video-src');
   const poster = item.getAttribute('data-video-poster');
-  const client = item.getAttribute('data-client');
   const title = item.getAttribute('data-title');
 
   const mediaElement = createMediaElement(src, poster, title);
-  if (!mediaElement) return;
+  if (!mediaElement) {
+    return;
+  }
 
   teardownMediaElement();
-  playerEmbed.appendChild(mediaElement);
   activeMediaElement = mediaElement;
-
-  if (activeMediaElement.tagName === 'VIDEO') {
-    activeMediaElement.play().catch(() => activeMediaElement.pause());
-  }
-
-  if (playerClientLabel) {
-    playerClientLabel.textContent = client || '';
-  }
-  if (playerTitleLabel) {
-    playerTitleLabel.textContent = title || '';
-  }
+  playerEmbed.appendChild(mediaElement);
 
   player.setAttribute('aria-hidden', 'false');
   playerOverlay.hidden = false;
@@ -201,7 +505,9 @@ const closePlayer = () => {
 };
 
 playerOverlay?.addEventListener('click', closePlayer);
-closeButton?.addEventListener('click', closePlayer);
+closeButtons.forEach((button) => {
+  button.addEventListener('click', closePlayer);
+});
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && player?.getAttribute('aria-hidden') === 'false') {
@@ -209,7 +515,85 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+const updatePortfolioThumbnail = (item, thumbnailUrl) => {
+  if (!item || !thumbnailUrl) return;
+
+  if (item.getAttribute('data-custom-thumbnail') === 'true') {
+    return;
+  }
+  const image = item.querySelector('.portfolio-item__image');
+  if (image && image.getAttribute('src') !== thumbnailUrl) {
+    image.setAttribute('src', thumbnailUrl);
+  }
+  item.setAttribute('data-video-poster', thumbnailUrl);
+};
+
+const updatePortfolioTitle = (item, title) => {
+  if (!item || typeof title !== 'string') return;
+  const safeTitle = title.trim();
+  if (!safeTitle) return;
+
+  const titleEl = item.querySelector('.portfolio-item__title');
+  if (titleEl && titleEl.textContent !== safeTitle) {
+    titleEl.textContent = safeTitle;
+  }
+
+  item.setAttribute('data-title', safeTitle);
+
+  const image = item.querySelector('.portfolio-item__image');
+  if (image) {
+    image.setAttribute('alt', `YouTube thumbnail for ${safeTitle}`);
+  }
+};
+
+const primePortfolioThumbnails = () => {
+  if (!portfolioItems.length) return;
+
+  portfolioItems.forEach((item) => {
+    if (item.getAttribute('data-custom-thumbnail') === 'true') {
+      return;
+    }
+    const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
+    if (!videoId) return;
+
+    const fallbackThumb = getYouTubeThumbnailUrl(videoId);
+    if (fallbackThumb) {
+      updatePortfolioThumbnail(item, fallbackThumb);
+    }
+  });
+};
+
+const hydratePortfolioMetadata = () => {
+  if (!portfolioItems.length) return;
+
+  portfolioItems.forEach((item) => {
+    if (item.getAttribute('data-custom-thumbnail') === 'true') {
+      return;
+    }
+    const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
+    if (!videoId) return;
+
+    fetchYouTubeMetadata(videoId)
+      .then((metadata) => {
+        if (!metadata) return;
+
+        if (metadata.thumbnail) {
+          updatePortfolioThumbnail(item, metadata.thumbnail);
+        }
+        if (metadata.title) {
+          updatePortfolioTitle(item, metadata.title);
+        }
+      })
+      .catch(() => {
+        /* ignore metadata errors */
+      });
+  });
+};
+
+const portfolioItems = renderPortfolioItems();
+
+primePortfolioThumbnails();
+hydratePortfolioMetadata();
 
 portfolioItems.forEach((item) => {
   item.addEventListener('click', () => openPlayer(item));
@@ -363,31 +747,68 @@ if (navList && navLinks.length) {
   });
 }
 
-const contactForm = document.querySelector('[data-contact-form]');
+const contactForms = Array.from(document.querySelectorAll('[data-contact-form]'));
+const TELEGRAM_BOT_TOKEN_FALLBACK = '8128978509:AAEi6gjKMUgMAngsZga_GxLucXfORrFB2pg';
 
-if (contactForm) {
+const getTelegramConfig = () => {
+  const botToken =
+    (typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_BOT_TOKEN === 'string'
+      ? window.VIKS_TELEGRAM_BOT_TOKEN.trim()
+      : '') || TELEGRAM_BOT_TOKEN_FALLBACK;
+
+  const chatId =
+    typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_CHAT_ID === 'string'
+      ? window.VIKS_TELEGRAM_CHAT_ID.trim()
+      : '';
+
+  return {
+    botToken,
+    chatId,
+    endpoint: botToken ? `https://api.telegram.org/bot${botToken}/sendMessage` : '',
+  };
+};
+
+const buildMessageLines = (context, payload, normalize) => {
+  const getValue = (primary, fallbacks = []) => {
+    const fields = [primary, ...fallbacks];
+    for (const field of fields) {
+      const value = normalize(payload[field]);
+      if (value) return value;
+    }
+    return '';
+  };
+
+  if (context === 'ces') {
+    return [
+      'New Website Submission',
+      '',
+      'Form: CES 2026 Coverage',
+      `Name: ${getValue('fullName') || '—'}`,
+      `Company: ${getValue('companyName') || '—'}`,
+      `Email: ${getValue('email', ['companyEmail']) || '—'}`,
+      `Hall/Booth: ${getValue('boothNumber') || '—'}`,
+      '',
+      `Notes: ${getValue('notes', ['message']) || '—'}`,
+    ];
+  }
+
+  return [
+    'New Website Submission',
+    '',
+    `First Name: ${getValue('firstName') || '—'}`,
+    `Last Name: ${getValue('lastName') || '—'}`,
+    `Email: ${getValue('companyEmail', ['email']) || '—'}`,
+    `Phone: ${getValue('phoneNumber') || '—'}`,
+    '',
+    `Message: ${getValue('message', ['notes']) || '—'}`,
+  ];
+};
+
+contactForms.forEach((contactForm) => {
   const statusEl = contactForm.querySelector('[data-form-status]');
   const submitButton = contactForm.querySelector('button[type="submit"]');
   const submitIdleLabel = submitButton?.textContent?.trim() || '';
-  const TELEGRAM_BOT_TOKEN_FALLBACK = '8128978509:AAEi6gjKMUgMAngsZga_GxLucXfORrFB2pg';
-
-  const getTelegramConfig = () => {
-    const botToken =
-      (typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_BOT_TOKEN === 'string'
-        ? window.VIKS_TELEGRAM_BOT_TOKEN.trim()
-        : '') || TELEGRAM_BOT_TOKEN_FALLBACK;
-
-    const chatId =
-      typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_CHAT_ID === 'string'
-        ? window.VIKS_TELEGRAM_CHAT_ID.trim()
-        : '';
-
-    return {
-      botToken,
-      chatId,
-      endpoint: botToken ? `https://api.telegram.org/bot${botToken}/sendMessage` : '',
-    };
-  };
+  const formContext = contactForm.dataset.formContext || 'default';
 
   const setStatus = (message = '', state = '') => {
     if (!statusEl) return;
@@ -432,16 +853,7 @@ if (contactForm) {
       return value.trim();
     };
 
-    const messageLines = [
-      'New Website Submission',
-      '',
-      `First Name: ${normalize(payload.firstName) || '—'}`,
-      `Last Name: ${normalize(payload.lastName) || '—'}`,
-      `Email: ${normalize(payload.companyEmail) || '—'}`,
-      `Phone: ${normalize(payload.phoneNumber) || '—'}`,
-      '',
-      `Message: ${normalize(payload.message) || '—'}`,
-    ];
+    const messageLines = buildMessageLines(formContext, payload, normalize);
 
     const requestBody = {
       chat_id: chatId,
@@ -495,4 +907,4 @@ if (contactForm) {
       }
     }
   });
-}
+});
