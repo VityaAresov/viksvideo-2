@@ -958,7 +958,8 @@ contactForms.forEach((contactForm) => {
   });
 });
 const TITLE_THUMBNAIL_OVERRIDES = {
-  'wince club commercial video': 'https://ibb.co/TCt4fm5',
+  'wince club commercial video':
+    'https://i.ibb.co/TCt4fm5/ces-2023-3381.jpg',
 };
 
 const setCustomThumbnail = (item, thumbnailUrl) => {
