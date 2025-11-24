@@ -702,7 +702,15 @@ const hydratePortfolioMetadata = () => {
       })
       .catch(() => {
         /* ignore metadata errors */
-      });
+    });
+  });
+};
+
+const enforceCustomThumbnails = () => {
+  if (!portfolioItems.length) return;
+
+  portfolioItems.forEach((item) => {
+    applyThumbnailOverrides(item);
   });
 };
 
@@ -710,6 +718,9 @@ const portfolioItems = renderPortfolioItems();
 
 primePortfolioThumbnails();
 hydratePortfolioMetadata();
+enforceCustomThumbnails();
+
+window.addEventListener('pageshow', enforceCustomThumbnails);
 
 portfolioItems.forEach((item) => {
   item.addEventListener('click', () => openPlayer(item));
