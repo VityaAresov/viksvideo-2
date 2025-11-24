@@ -957,10 +957,12 @@ contactForms.forEach((contactForm) => {
     }
   });
 });
-const TITLE_THUMBNAIL_OVERRIDES = {
-  'wine club commercial video': 'https://i.ibb.co/Kz53MrYG/IMG-1277.jpg',
-  'wince club commercial video': 'https://i.ibb.co/Kz53MrYG/IMG-1277.jpg',
-};
+const TITLE_THUMBNAIL_OVERRIDES = [
+  {
+    keywords: ['wine club', 'wince club'],
+    url: 'https://i.ibb.co/Kz53MrYG/IMG-1277.jpg',
+  },
+];
 
 const setCustomThumbnail = (item, thumbnailUrl) => {
   if (!item || !thumbnailUrl) return;
@@ -977,11 +979,14 @@ const setCustomThumbnail = (item, thumbnailUrl) => {
 const applyTitleThumbnailOverride = (item) => {
   if (!item) return;
   const title = (item.getAttribute('data-title') || '').trim().toLowerCase();
-  if (!title) return;
+  if (!title || !Array.isArray(TITLE_THUMBNAIL_OVERRIDES)) return;
 
-  const override = TITLE_THUMBNAIL_OVERRIDES[title];
-  if (!override) return;
+  const match = TITLE_THUMBNAIL_OVERRIDES.find((entry) =>
+    entry?.keywords?.some((keyword) => typeof keyword === 'string' && title.includes(keyword))
+  );
 
-  setCustomThumbnail(item, override);
+  if (!match || !match.url) return;
+
+  setCustomThumbnail(item, match.url);
 };
 
