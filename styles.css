@@ -2215,16 +2215,16 @@ body[data-page='ces'] .site-main {
   background: var(--highlight);
   color: #0a0a0a;
   font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   text-decoration: none;
-  letter-spacing: 0.01em;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-  box-shadow: 0 16px 32px rgba(109, 223, 102, 0.26);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .ces-button:hover,
 .ces-button:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 22px 44px rgba(109, 223, 102, 0.3);
   color: #0a0a0a;
 }
 
