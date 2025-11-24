@@ -8,7 +8,7 @@ window.VIKS_CASE_VIDEOS = [
   {
     src: 'https://www.youtube.com/watch?v=wDHWcnnLqG8',
     client: 'ABF',
-    title: 'American Business Forum',
+    title: 'America Business Forum 2025',
   },
   {
     src: 'https://www.youtube.com/watch?v=7pBXqY0euGA',

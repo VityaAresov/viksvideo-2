@@ -281,18 +281,19 @@ const buildPortfolioItemElement = (data) => {
   article.setAttribute('data-video-src', data.src);
 
   const videoId = extractYouTubeId(data.src);
+  const overridePoster = videoId ? VIDEO_THUMBNAIL_OVERRIDES[videoId] : '';
   const customPoster = data.thumbnail || '';
-  const fallbackPoster = customPoster || getYouTubeThumbnailUrl(videoId);
+  const fallbackPoster = customPoster || overridePoster || getYouTubeThumbnailUrl(videoId);
 
   if (fallbackPoster) {
     article.setAttribute('data-video-poster', fallbackPoster);
   }
 
-  if (customPoster) {
+  if (customPoster || overridePoster) {
     article.setAttribute('data-custom-thumbnail', 'true');
   }
 
-  const initialTitle = data.title || 'Loading title…';
+  const initialTitle = applyTitleRewrite(data.title || 'Loading title…');
   article.setAttribute('data-title', initialTitle);
 
   const media = document.createElement('div');
@@ -326,6 +327,9 @@ const buildPortfolioItemElement = (data) => {
 
   article.appendChild(media);
   article.appendChild(meta);
+
+  applyThumbnailOverrides(article);
+  maybeHideClient(article, initialTitle);
 
   return article;
 };
@@ -515,9 +519,48 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+const VIDEO_THUMBNAIL_OVERRIDES = {
+  wDHWcnnLqG8: 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+};
+
 const TITLE_THUMBNAIL_OVERRIDES = {
   'wine club commercial video': 'https://i.ibb.co/Kz53MrYG/IMG-1277.jpg',
   'wince club commercial video': 'https://i.ibb.co/Kz53MrYG/IMG-1277.jpg',
+  'america business forum 2025': 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+  'american business forum 2025': 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+  'america business forum 2025 / highlights': 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+  'american business forum 2025 / highlights': 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+  'american business forum': 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+  'america business forum': 'https://i.ibb.co/SX5gsfGj/IMG-1281.jpg',
+  'cardi b x fashion nova': 'https://i.ibb.co/gFWFvZH5/IMG-1279.jpg',
+  'fashion nova x cardi b': 'https://i.ibb.co/gFWFvZH5/IMG-1279.jpg',
+  ozora: 'https://i.ibb.co/XZHZ4Zsj/IMG-1280.jpg',
+};
+
+const TITLE_REWRITE_MAP = {
+  'america business forum 2025 / highlights': 'America Business Forum 2025',
+  'american business forum 2025 / highlights': 'America Business Forum 2025',
+  'american business forum': 'America Business Forum 2025',
+};
+
+const CLIENT_HIDDEN_TITLES = new Set([
+  'ozora',
+  'gross hunter',
+  'star wars shadow of justice',
+]);
+
+const normalizeTitleKey = (value) => (typeof value === 'string' ? value.trim().toLowerCase() : '');
+
+const resolveTitleOverride = (title, lookup) => {
+  const normalized = normalizeTitleKey(title);
+  if (!normalized) return '';
+
+  if (lookup[normalized]) {
+    return lookup[normalized];
+  }
+
+  const partial = Object.entries(lookup).find(([key]) => normalized.includes(key));
+  return partial ? partial[1] : '';
 };
 
 const setCustomThumbnail = (item, thumbnailUrl) => {
@@ -532,15 +575,46 @@ const setCustomThumbnail = (item, thumbnailUrl) => {
   item.setAttribute('data-custom-thumbnail', 'true');
 };
 
-const applyTitleThumbnailOverride = (item) => {
+const applyTitleRewrite = (title) => {
+  const safeTitle = typeof title === 'string' ? title.trim() : '';
+  if (!safeTitle) return '';
+
+  const rewritten = resolveTitleOverride(safeTitle, TITLE_REWRITE_MAP);
+  return rewritten || safeTitle;
+};
+
+const maybeHideClient = (item, title) => {
   if (!item) return;
-  const title = (item.getAttribute('data-title') || '').trim().toLowerCase();
-  if (!title) return;
+  const normalized = normalizeTitleKey(title);
+  if (!normalized) return;
 
-  const override = TITLE_THUMBNAIL_OVERRIDES[title];
-  if (!override) return;
+  const shouldHide =
+    CLIENT_HIDDEN_TITLES.has(normalized) ||
+    Array.from(CLIENT_HIDDEN_TITLES).some((key) => normalized.includes(key));
 
-  setCustomThumbnail(item, override);
+  if (!shouldHide) {
+    return;
+  }
+
+  const client = item.querySelector('.portfolio-item__client');
+  if (client) {
+    client.remove();
+  }
+  item.setAttribute('data-client-hidden', 'true');
+};
+
+const applyThumbnailOverrides = (item) => {
+  if (!item) return;
+  const src = item.getAttribute('data-video-src') || '';
+  const title = item.getAttribute('data-title') || '';
+  const videoId = extractYouTubeId(src);
+
+  const override =
+    (videoId && VIDEO_THUMBNAIL_OVERRIDES[videoId]) || resolveTitleOverride(title, TITLE_THUMBNAIL_OVERRIDES);
+
+  if (override) {
+    setCustomThumbnail(item, override);
+  }
 };
 
 const updatePortfolioThumbnail = (item, thumbnailUrl) => {
@@ -561,18 +635,21 @@ const updatePortfolioTitle = (item, title) => {
   const safeTitle = title.trim();
   if (!safeTitle) return;
 
+  const finalTitle = applyTitleRewrite(safeTitle);
+
   const titleEl = item.querySelector('.portfolio-item__title');
-  if (titleEl && titleEl.textContent !== safeTitle) {
-    titleEl.textContent = safeTitle;
+  if (titleEl && titleEl.textContent !== finalTitle) {
+    titleEl.textContent = finalTitle;
   }
 
-  item.setAttribute('data-title', safeTitle);
+  item.setAttribute('data-title', finalTitle);
 
-  applyTitleThumbnailOverride(item);
+  applyThumbnailOverrides(item);
+  maybeHideClient(item, finalTitle);
 
   const image = item.querySelector('.portfolio-item__image');
   if (image) {
-    image.setAttribute('alt', `YouTube thumbnail for ${safeTitle}`);
+    image.setAttribute('alt', `YouTube thumbnail for ${finalTitle}`);
   }
 };
 
@@ -580,7 +657,7 @@ const primePortfolioThumbnails = () => {
   if (!portfolioItems.length) return;
 
   portfolioItems.forEach((item) => {
-    applyTitleThumbnailOverride(item);
+    applyThumbnailOverrides(item);
 
     if (item.getAttribute('data-custom-thumbnail') === 'true') {
       return;
@@ -599,9 +676,6 @@ const hydratePortfolioMetadata = () => {
   if (!portfolioItems.length) return;
 
   portfolioItems.forEach((item) => {
-    if (item.getAttribute('data-custom-thumbnail') === 'true') {
-      return;
-    }
     const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
     if (!videoId) return;
 
