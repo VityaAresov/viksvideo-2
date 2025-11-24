@@ -841,6 +841,41 @@ a:focus-visible {
   }
 }
 
+@media (max-width: 640px) {
+  .portfolio__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-item,
+  .portfolio-item:nth-child(3n + 1),
+  .portfolio-item:nth-child(4n + 2),
+  .portfolio-item:nth-child(5n + 3) {
+    grid-column: auto;
+    min-height: unset;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+
+  .portfolio-item__meta {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    bottom: auto;
+    gap: 2px;
+    letter-spacing: 0.1em;
+  }
+
+  .portfolio-item__client {
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+  }
+
+  .portfolio-item__title {
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+    letter-spacing: 0.14em;
+  }
+}
+
 @media (max-width: 768px) {
   .site-header {
     mix-blend-mode: normal;

@@ -228,6 +228,13 @@ const DEFAULT_PORTFOLIO_CASES = [
   },
 ];
 
+const CUSTOM_THUMBNAIL_RULES = [
+  {
+    titleIncludes: 'wince club',
+    url: 'https://i.ibb.co/TCt4fm5/IMG-1277.jpg',
+  },
+];
+
 const sanitizeCaseEntry = (entry) => {
   if (!entry) return null;
 
@@ -546,6 +553,32 @@ const updatePortfolioTitle = (item, title) => {
   }
 };
 
+const matchesCustomRule = (item, rule) => {
+  if (!item || !rule) return false;
+
+  const videoId = extractYouTubeId(item.getAttribute('data-video-src') || '');
+  if (rule.ids && rule.ids.includes(videoId)) {
+    return true;
+  }
+
+  const title = (item.getAttribute('data-title') || '').toLowerCase();
+  if (rule.titleIncludes && title.includes(rule.titleIncludes.toLowerCase())) {
+    return true;
+  }
+
+  return false;
+};
+
+const applyCustomThumbnail = (item) => {
+  if (!item || item.getAttribute('data-custom-thumbnail') === 'true') return;
+
+  const match = CUSTOM_THUMBNAIL_RULES.find((rule) => matchesCustomRule(item, rule));
+  if (match && match.url) {
+    updatePortfolioThumbnail(item, match.url);
+    item.setAttribute('data-custom-thumbnail', 'true');
+  }
+};
+
 const primePortfolioThumbnails = () => {
   if (!portfolioItems.length) return;
 
@@ -560,6 +593,14 @@ const primePortfolioThumbnails = () => {
     if (fallbackThumb) {
       updatePortfolioThumbnail(item, fallbackThumb);
     }
+  });
+};
+
+const applyCustomThumbnails = () => {
+  if (!portfolioItems.length || !CUSTOM_THUMBNAIL_RULES.length) return;
+
+  portfolioItems.forEach((item) => {
+    applyCustomThumbnail(item);
   });
 };
 
@@ -583,6 +624,8 @@ const hydratePortfolioMetadata = () => {
         if (metadata.title) {
           updatePortfolioTitle(item, metadata.title);
         }
+
+        applyCustomThumbnail(item);
       })
       .catch(() => {
         /* ignore metadata errors */
@@ -592,6 +635,7 @@ const hydratePortfolioMetadata = () => {
 
 const portfolioItems = renderPortfolioItems();
 
+applyCustomThumbnails();
 primePortfolioThumbnails();
 hydratePortfolioMetadata();
 
