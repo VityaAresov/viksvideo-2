@@ -190,6 +190,11 @@ const getYouTubeThumbnailUrl = (videoId, quality = 'hqdefault') => {
   return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
 };
 
+const isTouchDevice = () => {
+  if (typeof window === 'undefined') return false;
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+};
+
 const DEFAULT_PORTFOLIO_CASES = [
   {
     src: 'https://www.youtube.com/watch?v=wDHWcnnLqG8',
@@ -271,7 +276,7 @@ const getConfiguredCaseVideos = () => {
   return source.map((entry) => sanitizeCaseEntry(entry)).filter(Boolean);
 };
 
-const buildPortfolioItemElement = (data) => {
+const buildPortfolioItemElement = (data, index = 0) => {
   if (!data || !data.src) {
     return null;
   }
@@ -302,6 +307,8 @@ const buildPortfolioItemElement = (data) => {
   const image = document.createElement('img');
   image.className = 'portfolio-item__image';
   image.loading = 'lazy';
+  image.decoding = 'async';
+  image.fetchPriority = index < 2 ? 'high' : 'low';
   image.alt = `YouTube thumbnail for ${initialTitle}`;
   if (fallbackPoster) {
     image.src = fallbackPoster;
@@ -343,7 +350,7 @@ const renderPortfolioItems = () => {
   portfolioGrid.innerHTML = '';
 
   const items = entries
-    .map((entry) => buildPortfolioItemElement(entry))
+    .map((entry, index) => buildPortfolioItemElement(entry, index))
     .filter((element) => element !== null);
 
   items.forEach((element) => {
@@ -535,6 +542,9 @@ const TITLE_THUMBNAIL_OVERRIDES = {
   'cardi b x fashion nova': 'https://i.ibb.co/gFWFvZH5/IMG-1279.jpg',
   'fashion nova x cardi b': 'https://i.ibb.co/gFWFvZH5/IMG-1279.jpg',
   ozora: 'https://i.ibb.co/XZHZ4Zsj/IMG-1280.jpg',
+  'eucalypso home commercial': 'https://i.ibb.co/5x5wG4Wr/IMG-1285.jpg',
+  'star wars shadow of justice': 'https://i.ibb.co/xK5b5pft/IMG-1282.jpg',
+  'gross hunter': 'https://i.ibb.co/DDhyX7hb/IMG-1283.jpg',
 };
 
 const TITLE_REWRITE_MAP = {
@@ -712,6 +722,54 @@ portfolioItems.forEach((item) => {
   item.setAttribute('tabindex', '0');
   item.setAttribute('role', 'button');
 });
+
+const initMobilePortfolioUndim = () => {
+  if (!portfolioItems.length || !isTouchDevice()) return;
+
+  let current;
+  const visibility = new Map();
+
+  const sync = () => {
+    let best = null;
+    let bestRatio = 0;
+
+    visibility.forEach((ratio, element) => {
+      if (ratio > bestRatio) {
+        bestRatio = ratio;
+        best = element;
+      }
+    });
+
+    if (best !== current) {
+      if (current) {
+        current.classList.remove('portfolio-item--undimmed');
+      }
+      if (best && bestRatio > 0.12) {
+        best.classList.add('portfolio-item--undimmed');
+        current = best;
+      } else {
+        current = null;
+      }
+    }
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        visibility.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
+      });
+      sync();
+    },
+    {
+      threshold: [0.15, 0.35, 0.55, 0.75, 0.95],
+      rootMargin: '-5% 0px',
+    }
+  );
+
+  portfolioItems.forEach((item) => observer.observe(item));
+};
+
+initMobilePortfolioUndim();
 
 const navList = document.querySelector('.site-nav__links');
 const navLinks = Array.from(document.querySelectorAll('.site-nav__link'));

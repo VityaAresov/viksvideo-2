@@ -414,6 +414,7 @@ a:focus-visible {
   background: var(--bg-alt);
   cursor: pointer;
   isolation: isolate;
+  --portfolio-overlay: rgba(0, 0, 0, 0.14);
 }
 
 .portfolio-item:nth-child(3n + 1) {
@@ -431,6 +432,23 @@ a:focus-visible {
 .portfolio-item:hover .portfolio-item__image,
 .portfolio-item:focus-visible .portfolio-item__image {
   transform: scale(1.05);
+}
+
+.portfolio-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--portfolio-overlay);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.portfolio-item:hover::after,
+.portfolio-item:focus-visible::after,
+.portfolio-item.portfolio-item--undimmed::after {
+  opacity: 0;
 }
 
 .portfolio-item__media {
@@ -465,6 +483,7 @@ a:focus-visible {
   box-shadow: none;
   color: #ffffff;
   text-shadow: var(--portfolio-meta-shadow);
+  z-index: 2;
 }
 
 .portfolio-item__client {
