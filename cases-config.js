@@ -16,16 +16,16 @@ window.VIKS_CASE_VIDEOS = [
     title: 'SKYLINE STORIES',
   },
   {
-    src: 'https://www.youtube.com/watch?v=cWvlf4zZcEQ',
-    client: 'Spotify',
-    title: 'FEEL THE BEAT',
-  },
-  {
     src: '',
     client: 'Jordan Belfort',
     title: 'Wolf Of Wall Street',
     thumbnail: 'https://i.ibb.co/C5hQRJRr/IMG-1307.jpg',
     disablePlayer: true,
+  },
+  {
+    src: 'https://www.youtube.com/watch?v=cWvlf4zZcEQ',
+    client: 'Spotify',
+    title: 'FEEL THE BEAT',
   },
   {
     src: 'https://www.youtube.com/watch?v=QXFhYLTxozk',
