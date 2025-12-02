@@ -2241,17 +2241,16 @@ body[data-page='ces'] .site-main {
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(90deg, #6fce66, #9ce36b, #68b55d, #9ce36b, #6fce66);
-  background-size: 300% 100%;
-  animation: runBorder 2s linear infinite;
+  background: conic-gradient(#9ce36b 0 40%, transparent 40% 100%);
+  animation: runBorder 3s linear infinite;
   z-index: -2;
-  filter: drop-shadow(0 0 10px rgba(156, 227, 107, 0.4));
+  filter: drop-shadow(0 0 10px rgba(156, 227, 107, 0.25));
 }
 
 .ces-button--outline-animated::after {
   content: "";
   position: absolute;
-  inset: 1px;
+  inset: 2px;
   border-radius: inherit;
   background: var(--bg);
   z-index: -1;
@@ -2265,7 +2264,7 @@ body[data-page='ces'] .site-main {
 
 .ces-button--outline-animated:hover::before,
 .ces-button--outline-animated:focus-visible::before {
-  filter: drop-shadow(0 0 12px rgba(156, 227, 107, 0.55));
+  filter: drop-shadow(0 0 12px rgba(156, 227, 107, 0.4));
 }
 
 .ces-button--ghost:hover,
@@ -2276,11 +2275,11 @@ body[data-page='ces'] .site-main {
 }
 
 @keyframes runBorder {
-  0% {
-    background-position: 0% 50%;
+  from {
+    transform: rotate(0deg);
   }
-  100% {
-    background-position: 200% 50%;
+  to {
+    transform: rotate(360deg);
   }
 }
 
