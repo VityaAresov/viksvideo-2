@@ -2254,7 +2254,7 @@ body[data-page='ces'] .site-main {
   border-radius: 12px;
   text-decoration: none;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-primary);
