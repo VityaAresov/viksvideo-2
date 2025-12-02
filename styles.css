@@ -2225,52 +2225,13 @@ body[data-page='ces'] .site-main {
   box-shadow: none;
 }
 
-/* Animated hollow outline button for CES hero */
+/* Hollow outline button for CES hero */
 .ces-button--outline-animated {
-  position: relative;
   background: transparent;
   color: var(--text-primary);
-  border: none;
-  overflow: visible;
-  isolation: isolate;
+  border: 2px solid var(--highlight);
+  box-shadow: none;
   font-weight: inherit;
-}
-
-.ces-button--outline-animated::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: conic-gradient(
-    transparent 0deg 200deg,
-    #6cb34f 200deg 230deg,
-    #9ce36b 230deg 260deg,
-    #6cb34f 260deg 300deg,
-    transparent 300deg 360deg
-  );
-  animation: runBorder 2.8s linear infinite;
-  z-index: -2;
-  filter: drop-shadow(0 0 8px rgba(156, 227, 107, 0.35));
-}
-
-.ces-button--outline-animated::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  background: var(--bg);
-  z-index: -1;
-}
-
-.ces-button--outline-animated:hover,
-.ces-button--outline-animated:focus-visible {
-  background: transparent;
-  color: var(--text-primary);
-}
-
-.ces-button--outline-animated:hover::before,
-.ces-button--outline-animated:focus-visible::before {
-  filter: drop-shadow(0 0 12px rgba(156, 227, 107, 0.4));
 }
 
 .ces-button--ghost:hover,
@@ -2278,15 +2239,6 @@ body[data-page='ces'] .site-main {
   background: var(--surface-elevated);
   color: var(--text-primary);
   transform: translateY(-2px);
-}
-
-@keyframes runBorder {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 
