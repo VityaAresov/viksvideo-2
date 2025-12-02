@@ -2226,48 +2226,87 @@ body[data-page='ces'] .site-main {
 }
 
 /* Hollow outline button for CES hero */
-.ces-button--outline-animated {
-  position: relative;
-  background: var(--surface-primary);
-  color: var(--text-primary);
-  border: none;
-  box-shadow: none;
-  font-weight: inherit;
-  overflow: hidden;
-}
-
-.ces-button--outline-animated::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: inherit;
-  background: conic-gradient(#9ce36b 0deg 140deg, transparent 140deg 360deg);
-  background-size: 100% 100%;
-  animation: runBorder 2.6s linear infinite;
-  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
-  box-shadow: 0 0 10px rgba(156, 227, 107, 0.25);
-}
-
-.ces-button--outline-animated:hover,
-.ces-button--outline-animated:focus-visible {
-  color: var(--text-primary);
-}
-
-@keyframes runBorder {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .ces-button--ghost:hover,
 .ces-button--ghost:focus-visible {
   background: var(--surface-elevated);
   color: var(--text-primary);
   transform: translateY(-2px);
+}
+
+/* CES hero CTA group */
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.btn-outline-track {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.btn-outline-track__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 18px;
+  border-radius: inherit;
+  background: var(--surface-primary);
+  line-height: 1.2;
+}
+
+.btn-outline-track__border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(
+    #d4f9a3 0deg 10deg,
+    #9ce36b 10deg 30deg,
+    #6bb52e 30deg 40deg,
+    transparent 40deg 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 2px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2px),
+    #000 calc(100% - 2px)
+  );
+  animation: border-rotate 2.8s linear infinite;
+  box-shadow: 0 0 8px rgba(156, 227, 107, 0.25);
+}
+
+@keyframes border-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(190deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 
