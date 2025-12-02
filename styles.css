@@ -2227,11 +2227,40 @@ body[data-page='ces'] .site-main {
 
 /* Hollow outline button for CES hero */
 .ces-button--outline-animated {
-  background: transparent;
+  position: relative;
+  background: var(--surface-primary);
   color: var(--text-primary);
-  border: 2px solid var(--highlight);
+  border: none;
   box-shadow: none;
   font-weight: inherit;
+  overflow: hidden;
+}
+
+.ces-button--outline-animated::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: conic-gradient(#9ce36b 0deg 140deg, transparent 140deg 360deg);
+  background-size: 100% 100%;
+  animation: runBorder 2.6s linear infinite;
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  box-shadow: 0 0 10px rgba(156, 227, 107, 0.25);
+}
+
+.ces-button--outline-animated:hover,
+.ces-button--outline-animated:focus-visible {
+  color: var(--text-primary);
+}
+
+@keyframes runBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .ces-button--ghost:hover,
