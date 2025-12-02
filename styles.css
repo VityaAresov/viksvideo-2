@@ -1853,6 +1853,13 @@ a:focus-visible {
   margin-top: 6px;
 }
 
+.ces-hero__buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .ces-hero__meta {
   display: flex;
   flex-wrap: wrap;
@@ -2218,11 +2225,55 @@ body[data-page='ces'] .site-main {
   box-shadow: none;
 }
 
+.ces-button--outline-animated {
+  position: relative;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid transparent;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ces-button--outline-animated::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #74c35b, #9ce36b, #5f9e4d);
+  background-size: 300% 300%;
+  animation: gradientMove 3s linear infinite;
+  z-index: -1;
+}
+
+.ces-button--outline-animated::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: calc(12px - 2px);
+  background: var(--surface-primary);
+  z-index: -1;
+}
+
+.ces-button--outline-animated:hover,
+.ces-button--outline-animated:focus-visible {
+  background: transparent;
+  color: var(--text-primary);
+}
+
 .ces-button--ghost:hover,
 .ces-button--ghost:focus-visible {
   background: var(--surface-elevated);
   color: var(--text-primary);
   transform: translateY(-2px);
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
 }
 
 
@@ -2312,6 +2363,11 @@ body[data-page='ces'] .site-main {
 
   .ces-button {
     width: 100%;
+  }
+
+  .ces-hero__buttons {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .ces-logos {
