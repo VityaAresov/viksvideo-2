@@ -2233,12 +2233,13 @@ body[data-page='ces'] .site-main {
   border: none;
   overflow: visible;
   isolation: isolate;
+  font-weight: 700;
 }
 
 .ces-button--outline-animated::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -2px;
   border-radius: inherit;
   background: linear-gradient(90deg, #74c35b, #9ce36b, #5f9e4d);
   background-size: 300% 100%;
@@ -2249,15 +2250,15 @@ body[data-page='ces'] .site-main {
 .ces-button--outline-animated::after {
   content: "";
   position: absolute;
-  inset: 3px;
-  border-radius: calc(12px - 3px);
+  inset: 2px;
+  border-radius: calc(12px - 2px);
   background: var(--bg);
   z-index: -1;
 }
 
 .ces-button--outline-animated:hover,
 .ces-button--outline-animated:focus-visible {
-  background: var(--surface-primary);
+  background: transparent;
   color: var(--text-primary);
 }
 
