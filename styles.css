@@ -655,6 +655,25 @@ a:focus-visible {
   font-size: 0.7rem;
 }
 
+.site-footer__service {
+  font-size: 0.65rem;
+  color: var(--text-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  line-height: 1.6;
+}
+
+.site-footer__service a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer__service a:hover,
+.site-footer__service a:focus-visible {
+  color: var(--accent);
+}
+
 
 .player__overlay {
   position: fixed;
