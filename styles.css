@@ -275,6 +275,19 @@ a:focus-visible {
   transform: translateY(-50%);
 }
 
+.site-header--minimal {
+  justify-content: flex-start;
+}
+
+.site-header--minimal .site-header__inner {
+  justify-content: flex-start;
+}
+
+.logo--static .logo__image {
+  filter: none;
+  max-height: 64px;
+}
+
 .theme-toggle {
   --toggle-height: clamp(26px, 1.6vw + 18px, 34px);
   --toggle-width: calc(var(--toggle-height) * 1.9);
@@ -2681,6 +2694,45 @@ body[data-page='seattle'] .site-main {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+.ads-footer {
+  border-top: 1px solid var(--divider-strong);
+  padding: 32px 20px;
+  background: var(--surface-primary);
+}
+
+.ads-footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.ads-footer__links {
+  display: flex;
+  gap: 16px;
+}
+
+.ads-footer__links a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.ads-footer__links a:hover,
+.ads-footer__links a:focus-visible {
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .ads-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 1024px) {

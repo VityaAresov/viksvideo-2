@@ -8,6 +8,8 @@
       name="description"
       content="Corporate, event, and brand video production in the US. See recent work and request availability for your project."
     />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="X-Robots-Tag" content="noindex, nofollow" />
     <link rel="canonical" href="https://www.viksproduction.com/ads" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,9 +46,9 @@
       </div>
     </div>
 
-    <header class="site-header" role="banner">
+    <header class="site-header site-header--minimal" role="banner">
       <div class="site-header__inner">
-        <div class="logo">
+        <div class="logo logo--static">
           <img class="logo__image" data-logo-image src="" alt="VIKS Production" />
           <span class="sr-only">VIKS Production</span>
         </div>
@@ -132,7 +134,7 @@
             <h2 class="ads-section__title" id="ads-cases-heading">Recent productions and outcomes</h2>
           </div>
           <div class="ads-cases__grid">
-            <a class="ads-case" href="./index.html#cases">
+            <div class="ads-case" tabindex="0">
               <div class="ads-case__media">
                 <img src="https://i.ibb.co/b5d30tGq/1-B01160-B-4181-44-BF-B5-F9-2248191-DE4-AD.jpg" alt="America Business Forum highlight" />
               </div>
@@ -144,8 +146,8 @@
                   <span>Corporate</span>
                 </div>
               </div>
-            </a>
-            <a class="ads-case" href="./index.html#cases">
+            </div>
+            <div class="ads-case" tabindex="0">
               <div class="ads-case__media">
                 <img src="https://i.ibb.co/gFWFvZH5/IMG-1279.jpg" alt="Cardi B x Fashion Nova campaign" />
               </div>
@@ -157,8 +159,8 @@
                   <span>Social</span>
                 </div>
               </div>
-            </a>
-            <a class="ads-case" href="./index.html#cases">
+            </div>
+            <div class="ads-case" tabindex="0">
               <div class="ads-case__media">
                 <img src="https://i.ibb.co/Kz53MrYG/IMG-1277.jpg" alt="Wine Club commercial visuals" />
               </div>
@@ -170,8 +172,8 @@
                   <span>Social</span>
                 </div>
               </div>
-            </a>
-            <a class="ads-case" href="./index.html#cases">
+            </div>
+            <div class="ads-case" tabindex="0">
               <div class="ads-case__media">
                 <img src="https://i.ibb.co/CpqwdVrf/IMG-1289.jpg" alt="Ozora festival coverage" />
               </div>
@@ -183,8 +185,8 @@
                   <span>Multi-cam</span>
                 </div>
               </div>
-            </a>
-            <a class="ads-case" href="./index.html#cases">
+            </div>
+            <div class="ads-case" tabindex="0">
               <div class="ads-case__media">
                 <img src="https://i.ibb.co/DDhyX7hb/IMG-1283.jpg" alt="Gross Hunter cinematic ad" />
               </div>
@@ -196,8 +198,8 @@
                   <span>Product</span>
                 </div>
               </div>
-            </a>
-            <a class="ads-case" href="./index.html#cases">
+            </div>
+            <div class="ads-case" tabindex="0">
               <div class="ads-case__media">
                 <img src="https://i.ibb.co/xK5b5pft/IMG-1282.jpg" alt="Star Wars fan experience" />
               </div>
@@ -209,7 +211,7 @@
                   <span>Experiential</span>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </section>
@@ -355,78 +357,23 @@
           </div>
           <div class="ads-final__actions">
             <a class="ces-button" href="tel:+17029129505">Call +1 (702) 912-9505</a>
-            <a class="btn-outline-track" href="./contact.html">
+            <a class="btn-outline-track" href="mailto:hello@viksproduction.com">
               <span class="btn-outline-track__border"></span>
-              <span class="btn-outline-track__inner">Go to Contact</span>
+              <span class="btn-outline-track__inner">Email the team</span>
             </a>
           </div>
         </div>
       </section>
-
-      <nav class="site-nav" aria-label="Primary">
-        <ul class="site-nav__links">
-          <li>
-            <a href="./ces.html" class="site-nav__link" data-nav-page="ces">CES 2026</a>
-          </li>
-          <li>
-            <a href="./about.html" class="site-nav__link" data-nav-page="about">About</a>
-          </li>
-          <li>
-            <a href="./index.html" class="site-nav__link" data-nav-page="cases">Cases</a>
-          </li>
-          <li>
-            <a href="./contact.html" class="site-nav__link" data-nav-page="contact">Contact</a>
-          </li>
-        </ul>
-      </nav>
     </main>
 
-    <footer class="site-footer" role="contentinfo">
-      <div class="site-footer__cta">
-        <p class="site-footer__headline">Get more in your inbox</p>
-        <form class="site-footer__form">
-          <label for="email" class="sr-only">Email</label>
-          <input id="email" type="email" placeholder="Subscribe" required />
-          <button type="submit">→</button>
-        </form>
+    <footer class="ads-footer" role="contentinfo">
+      <div class="ads-footer__inner">
+        <p class="ads-footer__text">Copyright © <span id="year"></span> VIKS Production.</p>
+        <div class="ads-footer__links">
+          <a href="tel:+17029129505">+1 (702) 912-9505</a>
+          <a href="mailto:hello@viksproduction.com">hello@viksproduction.com</a>
+        </div>
       </div>
-      <div class="site-footer__theme">
-        <button
-          type="button"
-          class="theme-toggle"
-          data-theme-toggle
-          data-theme-toggle-state="dark"
-          aria-pressed="true"
-          aria-label="Switch to light theme"
-        >
-          <span class="theme-toggle__track" aria-hidden="true">
-            <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 302.4 302.4" aria-hidden="true">
-                <path
-                  d="M204.8 97.6C191.2 84 172 75.2 151.2 75.2s-40 8.4-53.6 22.4c-13.6 13.6-22.4 32.8-22.4 53.6s8.8 40 22.4 53.6c13.6 13.6 32.8 22.4 53.6 22.4s40-8.4 53.6-22.4c13.6-13.6 22.4-32.8 22.4-53.6s-8.4-40-22.4-53.6zm-14.4 92.8c-10 10-24 16-39.2 16s-29.2-6-39.2-16-16-24-16-39.2 6-29.2 16-39.2 24-16 39.2-16 29.2 6 39.2 16 16 24 16 39.2-6 29.2-16 39.2zM292 140.8h-30.8c-5.6 0-10.4 4.8-10.4 10.4 0 5.6 4.8 10.4 10.4 10.4H292c5.6 0 10.4-4.8 10.4-10.4 0-5.6-4.8-10.4-10.4-10.4zM151.2 250.8c-5.6 0-10.4 4.8-10.4 10.4V292c0 5.6 4.8 10.4 10.4 10.4 5.6 0 10.4-4.8 10.4-10.4v-30.8c0-5.6-4.8-10.4-10.4-10.4zM258 243.6l-22-22c-3.6-4-10.4-4-14.4 0s-4 10.4 0 14.4l22 22c4 4 10.4 4 14.4 0s4-10.4 0-14.4zM151.2 0c-5.6 0-10.4 4.8-10.4 10.4v30.8c0 5.6 4.8 10.4 10.4 10.4 5.6 0 10.4-4.8 10.4-10.4V10.4c0-5.6-4.8-10.4-10.4-10.4zM258.4 44.4c-4-4-10.4-4-14.4 0l-22 22c-4 4-4 10.4 0 14.4 3.6 4 10.4 4 14.4 0l22-22c4-4 4-10.4 0-14.4zM41.2 140.8H10.4c-5.6 0-10.4 4.8-10.4 10.4s4.4 10.4 10.4 10.4h30.8c5.6 0 10.4-4.8 10.4-10.4 0-5.6-4.8-10.4-10.4-10.4zM80.4 221.6c-3.6-4-10.4-4-14.4 0l-22 22c-4 4-4 10.4 0 14.4s10.4 4 14.4 0l22-22c4-4 4-10.4 0-14.4zM80.4 66.4l-22-22c-4-4-10.4-4-14.4 0s-4 10.4 0 14.4l22 22c4 4 10.4 4 14.4 0s4-10.4 0-14.4z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-            <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 312.999 312.999" aria-hidden="true">
-                <path
-                  d="M305.6 178.053c-3.2-.8-6.4 0-9.2 2-10.4 8.8-22.4 16-35.6 20.8-12.4 4.8-26 7.2-40.4 7.2-32.4 0-62-13.2-83.2-34.4-21.2-21.2-34.4-50.8-34.4-83.2 0-13.6 2.4-26.8 6.4-38.8 4.4-12.8 10.8-24.4 19.2-34.4 3.6-4.4 2.8-10.8-1.6-14.4-2.8-2-6-2.8-9.2-2-34 9.2-63.6 29.6-84.8 56.8-20.4 26.8-32.8 60-32.8 96.4 0 43.6 17.6 83.2 46.4 112s68.4 46.4 112 46.4c36.8 0 70.8-12.8 98-34 27.6-21.6 47.6-52.4 56-87.6 2-6-1.2-11.6-6.8-12.8zm-61.2 83.6c-23.2 18.4-52.8 29.6-85.2 29.6-38 0-72.4-15.6-97.2-40.4-24.8-24.8-40.4-59.2-40.4-97.2 0-31.6 10.4-60.4 28.4-83.6 12.4-16 28-29.2 46-38.4-2 4.4-4 8.8-5.6 13.6-5.2 14.4-7.6 29.6-7.6 45.6 0 38 15.6 72.8 40.4 97.6s59.6 40.4 97.6 40.4c16.8 0 32.8-2.8 47.6-8.4 5.2-2 10.4-4 15.2-6.4-9.6 18.4-22.8 34.8-39.2 47.6z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-          </span>
-        </button>
-      </div>
-      <div class="site-footer__links">
-        <a href="/miami-video-production">Miami</a>
-        <a href="/las-vegas-video-production">Las Vegas</a>
-        <a href="/seattle-video-production">Seattle</a>
-        <a href="/chicago-video-production">Chicago</a>
-        <a href="/ces.html">CES</a>
-      </div>
-      <p class="site-footer__legal">Copyright © <span id="year"></span> VIKS Production. All rights reserved.</p>
     </footer>
 
     <script src="/script.js?v=2" defer></script>
