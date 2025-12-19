@@ -2201,6 +2201,10 @@ body[data-page='miami'] .site-main {
   padding-bottom: 170px;
 }
 
+body[data-page='seattle'] .site-main {
+  padding-bottom: 170px;
+}
+
 .ces-logos {
   display: flex;
   flex-wrap: wrap;

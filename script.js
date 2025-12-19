@@ -1001,6 +1001,21 @@ const buildMessageLines = (context, payload, normalize) => {
     ];
   }
 
+  if (context === 'seattle') {
+    return [
+      'New Website Submission',
+      '',
+      'Form: Seattle Video Production',
+      `Name: ${getValue('fullName') || '—'}`,
+      `Company: ${getValue('companyName') || '—'}`,
+      `Email: ${getValue('email', ['companyEmail']) || '—'}`,
+      `Event Dates: ${getValue('eventDates') || '—'}`,
+      `Venue/City: ${getValue('venueCity') || '—'}`,
+      '',
+      `Notes: ${getValue('notes', ['message']) || '—'}`,
+    ];
+  }
+
   if (context === 'miami') {
     return [
       'New Website Submission',
