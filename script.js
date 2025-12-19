@@ -1031,6 +1031,24 @@ const buildMessageLines = (context, payload, normalize) => {
     ];
   }
 
+  if (context === 'ads') {
+    return [
+      'New Website Submission',
+      '',
+      'Form: Ads Landing',
+      `Name: ${getValue('fullName') || '—'}`,
+      `Company: ${getValue('companyName') || '—'}`,
+      `Email: ${getValue('email', ['companyEmail']) || '—'}`,
+      `Phone: ${getValue('phoneNumber', ['phone']) || '—'}`,
+      `City/Location: ${getValue('city') || '—'}`,
+      `Project type: ${getValue('projectType') || '—'}`,
+      `Timeline: ${getValue('timeline', ['eventDates']) || '—'}`,
+      `Budget: ${getValue('budgetRange') || '—'}`,
+      '',
+      `Notes: ${getValue('notes', ['message']) || '—'}`,
+    ];
+  }
+
   return [
     'New Website Submission',
     '',
@@ -1051,7 +1069,13 @@ contactForms.forEach((contactForm) => {
 
   const setStatus = (message = '', state = '') => {
     if (!statusEl) return;
-    statusEl.textContent = message;
+
+    const allowHtmlSuccess = statusEl.dataset.allowHtml === 'true' && state === 'success';
+    if (allowHtmlSuccess) {
+      statusEl.innerHTML = message;
+    } else {
+      statusEl.textContent = message;
+    }
     if (state) {
       statusEl.dataset.state = state;
     } else {
@@ -1118,7 +1142,13 @@ contactForms.forEach((contactForm) => {
       }
 
       if (response.ok && result?.ok) {
-        setStatus('Message sent successfully!', 'success');
+        const successMessage =
+          formContext === 'ads'
+            ?
+                'Message sent successfully! <a href="tel:+17029129505">Call +1 (702) 912-9505</a>'
+            : 'Message sent successfully!';
+
+        setStatus(successMessage, 'success');
         contactForm.reset();
       } else {
         const description = result?.description || `Telegram error (${response.status}).`;
