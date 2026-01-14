@@ -296,6 +296,17 @@ a:focus-visible {
   grid-auto-flow: dense;
 }
 
+.portfolio__noscript {
+  margin: 24px auto 0;
+  max-width: 720px;
+  padding: 16px 24px;
+  border: 1px solid var(--border-muted);
+  border-radius: 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--surface-glass);
+}
+
 .portfolio-item {
   position: relative;
   grid-column: span 6;
@@ -1712,5 +1723,4 @@ a:focus-visible {
     background-position: 0% 0%;
   }
 }
-
 

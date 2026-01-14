@@ -367,6 +367,87 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+const portfolioGrid = document.querySelector('[data-portfolio-grid]');
+
+const buildPortfolioGrid = () => {
+  if (!portfolioGrid || typeof window === 'undefined') {
+    return;
+  }
+
+  const items = Array.isArray(window.VIKS_PORTFOLIO_ITEMS) ? window.VIKS_PORTFOLIO_ITEMS : [];
+
+  if (!items.length) {
+    return;
+  }
+
+  portfolioGrid.innerHTML = '';
+
+  items.forEach((item) => {
+    if (!item || typeof item !== 'object') {
+      return;
+    }
+
+    const article = document.createElement('article');
+    article.className = 'portfolio-item';
+
+    if (item.videoSrc) {
+      article.setAttribute('data-video-src', item.videoSrc);
+    }
+    if (item.videoPoster) {
+      article.setAttribute('data-video-poster', item.videoPoster);
+    }
+    if (item.client) {
+      article.setAttribute('data-client', item.client);
+    }
+    if (item.title) {
+      article.setAttribute('data-title', item.title);
+    }
+
+    const mediaWrapper = document.createElement('div');
+    mediaWrapper.className = 'portfolio-item__media';
+
+    if (item.media?.type === 'video' && item.media.src) {
+      const video = document.createElement('video');
+      video.className = 'portfolio-item__video';
+      video.src = item.media.src;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      if (item.media.poster) {
+        video.poster = item.media.poster;
+      }
+      mediaWrapper.appendChild(video);
+    } else {
+      const image = document.createElement('img');
+      image.className = 'portfolio-item__image';
+      image.src = item.media?.src || item.videoPoster || '';
+      image.alt = item.media?.alt || item.title || 'Portfolio poster';
+      image.loading = 'lazy';
+      mediaWrapper.appendChild(image);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'portfolio-item__meta';
+
+    const clientLabel = document.createElement('p');
+    clientLabel.className = 'portfolio-item__client';
+    clientLabel.textContent = item.client || '';
+
+    const titleLabel = document.createElement('h2');
+    titleLabel.className = 'portfolio-item__title';
+    titleLabel.textContent = item.title || '';
+
+    meta.appendChild(clientLabel);
+    meta.appendChild(titleLabel);
+
+    article.appendChild(mediaWrapper);
+    article.appendChild(meta);
+    portfolioGrid.appendChild(article);
+  });
+};
+
+buildPortfolioGrid();
+
 const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
 
 portfolioItems.forEach((item) => {
@@ -527,13 +608,12 @@ if (contactForm) {
   const statusEl = contactForm.querySelector('[data-form-status]');
   const submitButton = contactForm.querySelector('button[type="submit"]');
   const submitIdleLabel = submitButton?.textContent?.trim() || '';
-  const TELEGRAM_BOT_TOKEN_FALLBACK = '8128978509:AAEi6gjKMUgMAngsZga_GxLucXfORrFB2pg';
 
   const getTelegramConfig = () => {
     const botToken =
-      (typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_BOT_TOKEN === 'string'
+      typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_BOT_TOKEN === 'string'
         ? window.VIKS_TELEGRAM_BOT_TOKEN.trim()
-        : '') || TELEGRAM_BOT_TOKEN_FALLBACK;
+        : '';
 
     const chatId =
       typeof window !== 'undefined' && typeof window.VIKS_TELEGRAM_CHAT_ID === 'string'

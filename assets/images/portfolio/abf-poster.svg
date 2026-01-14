@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">American Business Forum Poster Placeholder</title>
+  <desc id="desc">A dark gradient background with a centered ABF monogram placeholder.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0b0b0d" />
+      <stop offset="100%" stop-color="#24262b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" />
+  <rect x="70" y="70" width="660" height="360" rx="36" fill="none" stroke="#f06449" stroke-width="6" />
+  <text x="400" y="250" text-anchor="middle" fill="#f5f5f5" font-family="'Space Grotesk', 'Inter', sans-serif" font-size="78" letter-spacing="6">ABF</text>
+  <text x="400" y="320" text-anchor="middle" fill="#f5f5f5" font-family="'Inter', sans-serif" font-size="28" opacity="0.75">American Business Forum</text>
+</svg>
