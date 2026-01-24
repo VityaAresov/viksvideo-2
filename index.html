@@ -67,6 +67,24 @@
 
     <main id="main" class="site-main" role="main">
       <section id="portfolio" class="portfolio" aria-label="Featured work">
+        <div class="portfolio__controls" role="group" aria-label="Cases view">
+          <button
+            type="button"
+            class="portfolio__control is-active"
+            data-portfolio-filter="horizontal"
+            aria-pressed="true"
+          >
+            Horizontal cases
+          </button>
+          <button
+            type="button"
+            class="portfolio__control"
+            data-portfolio-filter="vertical"
+            aria-pressed="false"
+          >
+            Reels (vertical)
+          </button>
+        </div>
         <div class="portfolio__grid" data-portfolio-grid></div>
         <noscript>
           <p class="portfolio__noscript">Enable JavaScript to view the full portfolio grid.</p>

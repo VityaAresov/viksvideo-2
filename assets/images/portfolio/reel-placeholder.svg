@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Vertical reel placeholder</title>
+  <desc id="desc">A portrait poster placeholder for vertical reels with a highlighted frame.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#101114" />
+      <stop offset="100%" stop-color="#2d3038" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" rx="48" fill="url(#bg)" />
+  <rect x="66" y="96" width="468" height="708" rx="40" fill="none" stroke="#f06449" stroke-width="8" />
+  <text x="300" y="410" text-anchor="middle" fill="#f5f5f5" font-family="'Space Grotesk', 'Inter', sans-serif" font-size="88" letter-spacing="8">REEL</text>
+  <text x="300" y="500" text-anchor="middle" fill="#f5f5f5" font-family="'Inter', sans-serif" font-size="30" opacity="0.78">Vertical case study</text>
+</svg>
